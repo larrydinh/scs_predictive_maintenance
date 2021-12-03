@@ -1,4 +1,9 @@
-import { add } from './math/add'
+import * as http from 'http'
+import { app } from './app'
+import { config } from './config'
+import { log } from './utils'
 
-console.log(`add: ${add(2, 3)}`)
-console.log(`add...: ${add(5, 6)}`)
+const server = http.createServer(app as any)
+server.listen(config.server.port, () => {
+  log.info(`Starting server at port: ${config.server.port}`)
+})
