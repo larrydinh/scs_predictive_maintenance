@@ -1,0 +1,26 @@
+{
+  "version": "0.0.1",
+  "npmClient": "npm",
+  "packages": ["packages/*"],
+  "command": {
+    "version": {
+      "allowBranch": ["master", "develop", "support/*", "release/*"],
+      "amend": false,
+      "exact": true,
+      "no-git-tag-version": true,
+      "no-push": true,
+      "noGitTagVersion": true,
+      "noPush": true,
+      "changelog-preset": "angular-bitbucket"
+    },
+    "bootstrap": {
+      "ignore": "*-docker-*",
+      "hoist": ["lerna", "prettier", "prettier-quick"],
+      "force-local": true
+    }
+  },
+  "publishConfig": {
+    "registry": "",
+    "auth-type": "legacy"
+  }
+}
