@@ -12,7 +12,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "generate-license-info": "node scripts/generate-license-info"
   },
   "keywords": [
     "SCS",
@@ -37,6 +38,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^27.4.3",
     "nodemon": "^2.0.15",
+    "npm-license-tracker": "3.0.0",
     "prettier": "^2.5.0",
     "ts-jest": "^27.0.7",
     "ts-node": "^10.4.0",
