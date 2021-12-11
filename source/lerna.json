@@ -4,7 +4,7 @@
   "packages": ["packages/*"],
   "command": {
     "version": {
-      "allowBranch": ["master", "develop", "support/*", "release/*"],
+      "allowBranch": ["master", "develop", "support/*", "release/*", "main"],
       "amend": false,
       "exact": true,
       "no-git-tag-version": true,
