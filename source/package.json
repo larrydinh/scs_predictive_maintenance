@@ -1,0 +1,21 @@
+{
+  "name": "root",
+  "description": "SCS Predictive Maintenance",
+  "private": true,
+  "devDependencies": {
+    "lerna": "4.0.0",
+    "prettier": "2.4.1",
+    "pretty-quick": "3.1.2"
+  },
+  "scripts": {
+    "postinstall": "lerna bootstrap --force-local",
+    "build": "lerna run build --parallel --no-bail &&  npm run lint -- --stream",
+    "clean": "lerna clean --yes",
+    "test": "lerna run test --stream",
+    "test:ci": "lerna run test:ci --stream",
+    "lint": "lerna run lint",
+    "prettier": "lerna run prettier",
+    "start": "lerna run start",
+    "bootstrap": "lerna bootstrap --hoist"
+  }
+}
