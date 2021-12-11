@@ -16,6 +16,7 @@
     "lint": "lerna run lint",
     "prettier": "lerna run prettier",
     "start": "lerna run start",
-    "bootstrap": "lerna bootstrap --hoist"
+    "bootstrap": "lerna bootstrap --hoist",
+    "generate-license-info": "lerna run generate-license-info"
   }
 }

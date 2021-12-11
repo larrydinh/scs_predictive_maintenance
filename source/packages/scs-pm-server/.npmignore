@@ -1,0 +1,8 @@
+/.vscode
+/src
+/domains
+/dist/test
+# files
+/*.json
+/*.js
+/autocannon.yml

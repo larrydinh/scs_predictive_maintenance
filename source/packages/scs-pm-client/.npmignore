@@ -1,0 +1,6 @@
+/.storybook/
+/.vscode/
+/src
+/raw-data
+*.json
+/typings
