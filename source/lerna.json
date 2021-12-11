@@ -1,10 +1,18 @@
 {
-  "version": "0.0.1",
+  "version": "0.0.2",
   "npmClient": "npm",
-  "packages": ["packages/*"],
+  "packages": [
+    "packages/*"
+  ],
   "command": {
     "version": {
-      "allowBranch": ["master", "develop", "support/*", "release/*", "main"],
+      "allowBranch": [
+        "master",
+        "develop",
+        "support/*",
+        "release/*",
+        "main"
+      ],
       "amend": false,
       "exact": true,
       "no-git-tag-version": true,
@@ -15,7 +23,11 @@
     },
     "bootstrap": {
       "ignore": "*-docker-*",
-      "hoist": ["lerna", "prettier", "prettier-quick"],
+      "hoist": [
+        "lerna",
+        "prettier",
+        "prettier-quick"
+      ],
       "force-local": true
     }
   },
