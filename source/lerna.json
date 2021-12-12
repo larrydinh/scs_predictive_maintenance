@@ -1,35 +1,12 @@
 {
   "version": "0.0.5",
   "npmClient": "npm",
-  "packages": [
-    "packages/*"
-  ],
+  "packages": ["packages/*"],
   "command": {
-    "version": {
-      "allowBranch": [
-        "master",
-        "develop",
-        "support/*",
-        "release/*",
-        "main",
-        "feature/*"
-      ],
-      "amend": false,
-      "exact": true,
-      "no-git-tag-version": true,
-      "no-push": true,
-      "noGitTagVersion": true,
-      "noPush": true,
-      "conventional-commits": true,
-      "changelogPreset": "angular"
-    },
+    "version": "independent",
     "bootstrap": {
       "ignore": "*-docker-*",
-      "hoist": [
-        "lerna",
-        "prettier",
-        "prettier-quick"
-      ],
+      "hoist": ["lerna", "prettier", "prettier-quick"],
       "force-local": true
     }
   },
