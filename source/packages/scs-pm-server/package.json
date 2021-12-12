@@ -1,6 +1,6 @@
 {
   "name": "scs-pm-server",
-  "version": "0.0.7",
+  "version": "0.2.0",
   "description": "Server for the predictive maintenance",
   "main": "index.js",
   "scripts": {
