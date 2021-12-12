@@ -20,5 +20,9 @@
     "bootstrap": "lerna bootstrap --hoist",
     "generate-license-info": "lerna run generate-license-info",
     "generate-changelog": "auto-changelog -p -u --issue-url https://github.com/amittkSharma/scs_predictive_maintenance/issues/{id}  --hide-credit --sort-commits date --commit-limit false"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amittkSharma/scs_predictive_maintenance.git"
   }
 }
