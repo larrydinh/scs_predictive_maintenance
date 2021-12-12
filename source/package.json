@@ -3,8 +3,9 @@
   "description": "SCS Predictive Maintenance",
   "private": true,
   "devDependencies": {
+    "auto-changelog": "2.3.0",
     "lerna": "4.0.0",
-    "prettier": "2.4.1",
+    "prettier": "2.5.1",
     "pretty-quick": "3.1.2"
   },
   "scripts": {
@@ -17,6 +18,11 @@
     "prettier": "lerna run prettier",
     "start": "lerna run start",
     "bootstrap": "lerna bootstrap --hoist",
-    "generate-license-info": "lerna run generate-license-info"
+    "generate-license-info": "lerna run generate-license-info",
+    "generate-changelog": "auto-changelog -p -u --issue-url https://github.com/amittkSharma/scs_predictive_maintenance/issues/{id}  --hide-credit --sort-commits date --commit-limit false"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amittkSharma/scs_predictive_maintenance.git"
   }
 }

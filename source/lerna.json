@@ -1,25 +1,17 @@
 {
-  "version": "0.0.2",
+  "version": "0.2.0",
   "npmClient": "npm",
-  "packages": ["packages/*"],
+  "packages": [
+    "packages/*"
+  ],
   "command": {
-    "version": {
-      "allowBranch": ["master", "develop", "support/*", "release/*", "main"],
-      "amend": false,
-      "exact": true,
-      "no-git-tag-version": true,
-      "no-push": true,
-      "noGitTagVersion": true,
-      "noPush": true,
-      "conventional-commits": true,
-      "changelogPreset": {
-        "name": "conventionalcommits",
-        "issueUrlFormat": "https://github.com/amittkSharma/scs_predictive_maintenance/issues/{id}"
-      }
-    },
     "bootstrap": {
       "ignore": "*-docker-*",
-      "hoist": ["lerna", "prettier", "prettier-quick"],
+      "hoist": [
+        "lerna",
+        "prettier",
+        "prettier-quick"
+      ],
       "force-local": true
     }
   },
