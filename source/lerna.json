@@ -1,12 +1,18 @@
 {
-  "version": "0.0.5",
+  "version": "0.0.6",
   "npmClient": "npm",
-  "packages": ["packages/*"],
+  "packages": [
+    "packages/*"
+  ],
   "command": {
     "version": "independent",
     "bootstrap": {
       "ignore": "*-docker-*",
-      "hoist": ["lerna", "prettier", "prettier-quick"],
+      "hoist": [
+        "lerna",
+        "prettier",
+        "prettier-quick"
+      ],
       "force-local": true
     }
   },
