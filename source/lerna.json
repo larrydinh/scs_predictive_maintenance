@@ -1,9 +1,7 @@
 {
   "version": "0.0.4",
   "npmClient": "npm",
-  "packages": [
-    "packages/*"
-  ],
+  "packages": ["packages/*"],
   "command": {
     "version": {
       "allowBranch": [
@@ -21,15 +19,11 @@
       "noGitTagVersion": true,
       "noPush": true,
       "conventional-commits": true,
-      "changelogPreset": "angular-bitbucket"
+      "changelogPreset": "angular"
     },
     "bootstrap": {
       "ignore": "*-docker-*",
-      "hoist": [
-        "lerna",
-        "prettier",
-        "prettier-quick"
-      ],
+      "hoist": ["lerna", "prettier", "prettier-quick"],
       "force-local": true
     }
   },
