@@ -1,7 +1,9 @@
 {
-  "version": "0.0.3",
+  "version": "0.0.4",
   "npmClient": "npm",
-  "packages": ["packages/*"],
+  "packages": [
+    "packages/*"
+  ],
   "command": {
     "version": {
       "allowBranch": [
@@ -23,7 +25,11 @@
     },
     "bootstrap": {
       "ignore": "*-docker-*",
-      "hoist": ["lerna", "prettier", "prettier-quick"],
+      "hoist": [
+        "lerna",
+        "prettier",
+        "prettier-quick"
+      ],
       "force-local": true
     }
   },
