@@ -1,9 +1,7 @@
 {
   "version": "0.0.3",
   "npmClient": "npm",
-  "packages": [
-    "packages/*"
-  ],
+  "packages": ["packages/*"],
   "command": {
     "version": {
       "allowBranch": [
@@ -21,18 +19,11 @@
       "noGitTagVersion": true,
       "noPush": true,
       "conventional-commits": true,
-      "changelogPreset": {
-        "name": "conventionalcommits",
-        "issueUrlFormat": "https://github.com/amittkSharma/scs_predictive_maintenance/issues/{id}"
-      }
+      "changelogPreset": "angular-bitbucket"
     },
     "bootstrap": {
       "ignore": "*-docker-*",
-      "hoist": [
-        "lerna",
-        "prettier",
-        "prettier-quick"
-      ],
+      "hoist": ["lerna", "prettier", "prettier-quick"],
       "force-local": true
     }
   },
