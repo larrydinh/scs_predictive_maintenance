@@ -2,10 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "jsx": "react-jsx",
-    "lib": [
-      "es6",
-      "dom"
-    ],
+    "lib": ["es6", "dom"],
     "module": "esnext",
     "moduleResolution": "node",
     "outDir": "build/dist",
@@ -41,8 +38,6 @@
     "jest",
     "src/setupTests.ts"
   ],
-  "include": [
-    "src",
-    "typings/*.d.ts"
-  ]
+  "include": ["src", "typings/*.d.ts"],
+  "references": [{ "path": "../scs-pm-core" }]
 }

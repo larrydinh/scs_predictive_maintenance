@@ -1,0 +1,8 @@
+dist/**/*
+build
+bin
+node_modules
+npm_licenses
+coverage
+package.json
+package-lock.json
