@@ -1,6 +1,6 @@
 {
   "name": "scs-pm-core",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "SCS PM core package, shareable between the client and server packages",
   "main": "build/dist/index.js",
   "typings": "build/dist/index.d.ts",
