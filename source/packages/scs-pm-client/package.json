@@ -8,6 +8,7 @@
     "test": "react-scripts test",
     "lint": "eslint src",
     "lint-fix": "eslint src --quiet --fix",
+    "prettier": "prettier --write '**/*.{tsx,ts,js}'",
     "generate-license-info": "node scripts/generate-license-info"
   },
   "dependencies": {

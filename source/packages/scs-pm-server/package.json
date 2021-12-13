@@ -13,6 +13,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "lint": "eslint src",
+    "prettier": "prettier --write '**/*.{ts,js}'",
     "generate-license-info": "node scripts/generate-license-info"
   },
   "keywords": [
