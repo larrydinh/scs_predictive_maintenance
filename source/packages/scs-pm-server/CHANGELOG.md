@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/amittkSharma/scs_predictive_maintenance/compare/v0.4.0...v0.5.0) (2021-12-14)
+
+
+### Features
+
+* Create file based logger for the server package in order to capture for debugging and maintenance purposes ([#33](https://github.com/amittkSharma/scs_predictive_maintenance/issues/33)) ([8453374](https://github.com/amittkSharma/scs_predictive_maintenance/commit/84533747773a9caa045927a6aa54ec3e62efcdc7))
+
+
+
+
+
 # 0.4.0 (2021-12-13)
 
 
