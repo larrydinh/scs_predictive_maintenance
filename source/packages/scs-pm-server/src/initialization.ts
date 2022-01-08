@@ -5,4 +5,8 @@ import { createDirectory } from './utils'
 export function initialize() {
   createDirectory(config.app.homeDir, config.app.appDirectory)
   createDirectory(path.join(config.app.homeDir, config.app.appDirectory), config.app.logsDirectory)
+  createDirectory(
+    path.join(config.app.homeDir, config.app.appDirectory),
+    config.app.machinesDirectory,
+  )
 }

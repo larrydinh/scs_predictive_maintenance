@@ -1,1 +1,1 @@
-export * from './check'
+export * from './label-value'
