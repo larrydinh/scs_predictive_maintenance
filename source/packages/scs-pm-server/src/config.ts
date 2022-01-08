@@ -4,6 +4,7 @@ export const config = {
   server: {
     port: 8081,
     version: process.env.npm_package_version,
+    environment: process.env.NODE_ENV?.toLowerCase(),
   },
   app: {
     homeDir: os.homedir(),

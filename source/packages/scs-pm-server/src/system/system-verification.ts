@@ -1,11 +1,13 @@
 import * as path from 'path'
-import { config } from './config'
-import { DirectoryType, getLabelValueFromEnum } from './models'
-import { getDirectoryPath, log, validateDirectoryExistence } from './utils'
+import { config } from '../config'
+import { DirectoryType, getLabelValueFromEnum, VersionInfo } from '../models'
+import { getDirectoryPath, log, validateDirectoryExistence } from '../utils'
+import { getVersionInformation } from './system-version-info'
 
 interface VerificationResult {
   status: boolean
   message: string
+  version: VersionInfo
 }
 
 export function verifySystem(): VerificationResult {
@@ -14,6 +16,7 @@ export function verifySystem(): VerificationResult {
   const result: VerificationResult = {
     status: false,
     message: 'Verification Failed',
+    version: getVersionInformation(),
   }
   directories.forEach(directory => {
     switch (directory.label) {
@@ -49,6 +52,6 @@ export function verifySystem(): VerificationResult {
       }
     }
   })
-  log.info(`System verification is complete with result: ${JSON.stringify(result)}`)
+  log.info(`System verification is complete with result: ${JSON.stringify(result, null, 2)}`)
   return result
 }
