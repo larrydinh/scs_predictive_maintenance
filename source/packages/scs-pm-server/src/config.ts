@@ -2,13 +2,14 @@ import * as os from 'os'
 
 export const config = {
   server: {
-    port: 8080,
+    port: 8081,
     version: process.env.npm_package_version,
   },
   app: {
     homeDir: os.homedir(),
-    appDirectory: 'SCS_PM',
+    appDirectory: 'scs_pm',
     logsDirectory: 'logs',
+    machinesDirectory: 'machines',
     logsFileName: 'scs-pm-server-logs.txt',
   },
 }
