@@ -3,3 +3,7 @@ http://localhost:8081/api/verify/
 
 ###
 http://localhost:8081/api/version
+
+
+### Get all machines model information
+http://localhost:8081/api/machines
