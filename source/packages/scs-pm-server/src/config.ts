@@ -10,7 +10,12 @@ export const config = {
     homeDir: os.homedir(),
     appDirectory: 'scs_pm',
     logsDirectory: 'logs',
-    machinesDirectory: 'machines',
     logsFileName: 'scs-pm-server-logs.txt',
+    machinesDirectory: 'machines',
+    machinesFileName: 'scs-pm-machines.json',
+  },
+  rawData: {
+    path: `${__dirname}/raw-data/`,
+    machineDummyData: 'dummy-machine.json',
   },
 }
