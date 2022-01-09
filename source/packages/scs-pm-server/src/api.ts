@@ -1,8 +1,8 @@
 import { Request, Response, Router } from 'express'
-import * as path from 'path'
-import { config } from './config'
+import { MachineModelInformation } from 'scs-pm-core'
+import { log } from './logger'
+import { addNewMachineToExistingMachines, getAllMachinesModelInformation } from './machine'
 import { getVersionInformation, verifySystem } from './system'
-import { getDirectoryPath, log, readFile } from './utils'
 
 export const api = Router()
 
@@ -18,18 +18,25 @@ function systemInformation(_req: Request, res: Response) {
 
 function machinesModelInformation(_req: Request, res: Response) {
   try {
-    const machinesModelInfoPath = path.join(
-      getDirectoryPath(
-        path.join(config.app.homeDir, config.app.appDirectory),
-        config.app.machinesDirectory,
-      ),
-    )
-    const machinesModelInfo = readFile(machinesModelInfoPath, config.app.machinesFileName)
-    res.status(200).json({ machinesModelInfo })
+    const machinesModelInfo = getAllMachinesModelInformation()
+    res.status(200).json(machinesModelInfo)
   } catch (err) {
-    const errorMessage = `Unable to fetch the machines model information due: ${
+    const errorMessage = `Unable to fetch the machines model information due to: ${
       (err as Error).message
     }`
+    log.error(errorMessage)
+    res.status(500).json({ error: errorMessage })
+  }
+}
+
+function addNewMachine(req: Request, res: Response) {
+  try {
+    const newMachine: MachineModelInformation = req.body.machine
+    const updatedMachines = addNewMachineToExistingMachines(newMachine)
+
+    res.status(200).json({ machines: updatedMachines })
+  } catch (err) {
+    const errorMessage = `Unable to add new machine to the system due t0: ${(err as Error).message}`
     log.error(errorMessage)
     res.status(500).json({ error: errorMessage })
   }
@@ -38,3 +45,4 @@ function machinesModelInformation(_req: Request, res: Response) {
 api.get('/verify', verifyServerSetup)
 api.get('/version', systemInformation)
 api.get('/machines', machinesModelInformation)
+api.post('/addMachine', addNewMachine)

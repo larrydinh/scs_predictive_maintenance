@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import { log } from './logger'
+import { log } from '../logger'
 import { validateFileExistence } from './validate-file'
 
 export function createFile(destinationFolder: string, fileName: string, data: string): void {

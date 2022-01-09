@@ -20,3 +20,7 @@ export interface MachineModelInformation extends Resource {
   description: string
   operatingManualLink: string
 }
+
+export interface MachineModelInfoResponse {
+  machines: MachineModelInformation[]
+}
