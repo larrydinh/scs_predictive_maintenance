@@ -1,12 +1,13 @@
-export interface Person {
+import { Resource } from './resource'
+
+export interface Person extends Resource {
   firstName: string
   lastName: string
   contactNumber: number
   email: string
 }
 
-export interface MachineModelInformation {
-  identifier: string
+export interface MachineModelInformation extends Resource {
   name: string
   givenName: string
   model: string

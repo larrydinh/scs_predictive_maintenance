@@ -8,6 +8,7 @@
       "manufactureYear": "2000",
       "manufacturerName": "Machine A1 Gmbh",
       "manufacturerContactPerson": {
+        "identifier": "114d1854-f7c1-4d04-8850-4446e0efc93d",
         "firstName": "Thomas",
         "lastName": "Thomas",
         "contactNumber": 100,
@@ -27,6 +28,7 @@
       "manufactureYear": "2001",
       "manufacturerName": "Machine B1 Gmbh",
       "manufacturerContactPerson": {
+        "identifier": "114d1854-f7c1-4d04-8850-4446e0efc93c",
         "firstName": "Daniel",
         "lastName": "Daniel",
         "contactNumber": 100,
