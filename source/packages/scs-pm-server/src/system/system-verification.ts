@@ -1,7 +1,8 @@
 import * as path from 'path'
 import { config } from '../config'
+import { log } from '../logger'
 import { DirectoryType, getLabelValueFromEnum, VersionInfo } from '../models'
-import { getDirectoryPath, log, validateDirectoryExistence } from '../utils'
+import { getDirectoryPath, validateDirectoryExistence } from '../utils'
 import { getVersionInformation } from './system-version-info'
 
 interface VerificationResult {

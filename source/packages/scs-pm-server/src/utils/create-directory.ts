@@ -1,6 +1,6 @@
 import * as fs from 'fs'
+import { log } from '../logger'
 import { getDirectoryPath } from './get-directory-path'
-import { log } from './logger'
 import { validateDirectoryExistence } from './validate-directory-path'
 
 export function createDirectory(destinationFolder: string, directoryName: string): void {

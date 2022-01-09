@@ -1,4 +1,5 @@
 import * as os from 'os'
+import * as path from 'path'
 
 export const config = {
   server: {
@@ -17,5 +18,20 @@ export const config = {
   rawData: {
     path: `${__dirname}/raw-data/`,
     machineDummyData: 'dummy-machine.json',
+  },
+  getAppsDirectory(): string {
+    return path.join(config.app.homeDir, config.app.appDirectory)
+  },
+  getLogsDirectory(): string {
+    return path.join(
+      path.join(config.app.homeDir, config.app.appDirectory),
+      config.app.logsDirectory,
+    )
+  },
+  getMachinesDirectory(): string {
+    return path.join(
+      path.join(config.app.homeDir, config.app.appDirectory),
+      config.app.machinesDirectory,
+    )
   },
 }

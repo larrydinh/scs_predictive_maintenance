@@ -1,7 +1,6 @@
-import path = require('path/posix')
+import * as path from 'path'
 import { pino } from 'pino'
 import { config } from '../config'
-import { getDirectoryPath } from './get-directory-path'
 
 const dest = pino.destination()
 
@@ -23,13 +22,7 @@ export const log = pino(
           options: {
             translateTime: true,
             colorize: true,
-            destination: path.join(
-              getDirectoryPath(
-                path.join(config.app.homeDir, config.app.appDirectory),
-                config.app.logsDirectory,
-              ),
-              config.app.logsFileName,
-            ),
+            destination: path.join(config.getLogsDirectory(), config.app.logsFileName),
           },
         },
       ],
