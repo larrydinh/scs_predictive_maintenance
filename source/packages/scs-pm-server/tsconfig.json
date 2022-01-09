@@ -33,5 +33,6 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": ["src/**/*", "src/**/*.json"],
-  "exclude": ["node_modules", "build", "coverage"]
+  "exclude": ["node_modules", "build", "coverage"],
+  "references": [{ "path": "../scs-pm-core" }]
 }

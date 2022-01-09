@@ -1,0 +1,37 @@
+###
+http://localhost:8081/api/verify/
+
+###
+http://localhost:8081/api/version
+
+
+### Get all machines model information
+http://localhost:8081/api/machines
+
+
+###
+POST http://localhost:8081/api/addMachine
+content-type: application/json
+
+{
+  "machine": {
+    "identifier": "3fc25e14-efc4-4fe5-b277-264e929faf9d",
+    "name": "Machine C",
+    "givenName": "Machine C1",
+    "model": "Machine Model C1",
+    "manufactureYear": "2002",
+    "manufacturerName": "Machine C1 Gmbh",
+    "manufacturerContactPerson": {
+      "identifier": "3fc25e14-efc4-4fe5-b277-264e929faf9d",
+      "firstName": "Steffen",
+      "lastName": "Steffen",
+      "contactNumber": 101,
+      "email": "steffen@myEmail.com"
+    },
+    "purchaseDate": "2021-08-22T12:27:42.303Z",
+    "inductionDate": "2021-10-22T12:27:42.303Z",
+    "departmentName": "Department C1",
+    "description": "Coffee Machine",
+    "operatingManualLink": "https://github.com/amittkSharma?tab=repositories"
+  }
+}

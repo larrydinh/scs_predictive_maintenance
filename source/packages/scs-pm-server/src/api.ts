@@ -1,9 +1,48 @@
 import { Request, Response, Router } from 'express'
+import { MachineModelInformation } from 'scs-pm-core'
+import { log } from './logger'
+import { addNewMachineToExistingMachines, getAllMachinesModelInformation } from './machine'
+import { getVersionInformation, verifySystem } from './system'
 
 export const api = Router()
 
-function verifyServerConnection(_req: Request, res: Response) {
-  res.status(200).json({ message: 'Server is connected' })
+function verifyServerSetup(_req: Request, res: Response) {
+  const verificationResult = verifySystem()
+  res.status(200).json({ verificationResult })
 }
 
-api.get('/verify', verifyServerConnection)
+function systemInformation(_req: Request, res: Response) {
+  const versionInfo = getVersionInformation()
+  res.status(200).json({ versionInfo })
+}
+
+function machinesModelInformation(_req: Request, res: Response) {
+  try {
+    const machinesModelInfo = getAllMachinesModelInformation()
+    res.status(200).json(machinesModelInfo)
+  } catch (err) {
+    const errorMessage = `Unable to fetch the machines model information due to: ${
+      (err as Error).message
+    }`
+    log.error(errorMessage)
+    res.status(500).json({ error: errorMessage })
+  }
+}
+
+function addNewMachine(req: Request, res: Response) {
+  try {
+    const newMachine: MachineModelInformation = req.body.machine
+    const updatedMachines = addNewMachineToExistingMachines(newMachine)
+
+    res.status(200).json({ machines: updatedMachines })
+  } catch (err) {
+    const errorMessage = `Unable to add new machine to the system due t0: ${(err as Error).message}`
+    log.error(errorMessage)
+    res.status(500).json({ error: errorMessage })
+  }
+}
+
+api.get('/verify', verifyServerSetup)
+api.get('/version', systemInformation)
+api.get('/machines', machinesModelInformation)
+api.post('/addMachine', addNewMachine)
