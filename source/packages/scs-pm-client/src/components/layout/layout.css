@@ -1,0 +1,42 @@
+.viewport {
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  align-content: stretch;
+  justify-content: stretch;
+  flex: 1;
+}
+.content-scroll-container {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.sub-header-control-panel-container {
+  flex: 1;
+  flex-direction: column;
+}
+.sub-header-control-panel {
+  display: flex;
+  margin-right: 10px;
+}
+
+.sub-header-control-panel .gap {
+  width: 10px;
+}
+
+.column-header-panel-container {
+  display: flex;
+  flex-direction: column;
+}
+.column-header-panel {
+  flex: 1;
+  display: flex;
+}
