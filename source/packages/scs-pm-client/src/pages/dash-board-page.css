@@ -1,0 +1,24 @@
+.control-panel-container {
+  margin: 2px;
+  display: flex;
+  flex-direction: column;
+}
+.control-panel {
+  flex: 1;
+  display: flex;
+  margin: 6px;
+}
+
+.frame-control-panel-container {
+  display: flex;
+  flex-direction: column;
+}
+.frame-control-panel {
+  flex: 1;
+  display: flex;
+}
+
+.tabbed-json-viewer {
+  height: 685px;
+  overflow-y: auto;
+}
