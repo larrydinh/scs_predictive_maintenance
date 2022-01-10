@@ -1,9 +1,10 @@
 import './App.css'
+import { LaunchPage } from './pages/launch'
 
 function App(): JSX.Element {
   return (
     <div className="App">
-      <header className="App-header">SCS Predictive Maintenance</header>
+      <LaunchPage />
     </div>
   )
 }
