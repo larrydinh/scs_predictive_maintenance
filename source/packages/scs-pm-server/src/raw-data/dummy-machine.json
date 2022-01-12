@@ -3,6 +3,7 @@
     {
       "identifier": "5fa2204e-0326-415f-a1f5-fff74f0d0ddd",
       "name": "Machine A",
+      "machineId": "M_0140",
       "givenName": "Machine A1",
       "model": "Machine Model A1",
       "manufactureYear": "2000",
@@ -23,6 +24,7 @@
     {
       "identifier": "c2ed4452-25a5-4f02-a60c-ef4572cdbb39",
       "name": "Machine B",
+      "machineId": "M_0054",
       "givenName": "Machine B1",
       "model": "Machine Model B1",
       "manufactureYear": "2001",

@@ -18,6 +18,7 @@ export const ResourceManagementViewer: React.FC<Props> = ({ appEntityName, dataS
         const columnKeys = [
           'name',
           'givenName',
+          'machineId',
           'model',
           'manufactureYear',
           'manufacturerName',

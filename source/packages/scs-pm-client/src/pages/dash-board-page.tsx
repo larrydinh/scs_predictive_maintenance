@@ -21,7 +21,7 @@ export const DashBoardPage: React.FC = () => {
                   domainValues={machineModelInfo.map(x => {
                     return {
                       value: x.identifier,
-                      label: x.givenName,
+                      label: `${x.givenName} (#: ${x.machineId})`,
                     }
                   })}
                   selectedValue={machine?.identifier || 'Select A Machine'}

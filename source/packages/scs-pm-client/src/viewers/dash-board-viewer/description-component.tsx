@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const DescriptionComponent: React.FC<Props> = ({ value, extra }: Props) => {
-  const { givenName, inductionDate, departmentName, description, operatingManualLink } = value
+  const { givenName, machineId, inductionDate, departmentName, description, operatingManualLink } = value
   return (
     <Collapse
       defaultActiveKey="1"
@@ -19,8 +19,9 @@ export const DescriptionComponent: React.FC<Props> = ({ value, extra }: Props) =
         padding: 8,
       }}
     >
-      <Collapse.Panel header={`Machine Synopsis: (${givenName})`} key="1">
+      <Collapse.Panel header={`Machine Synopsis: (${givenName}- ${machineId})`} key="1">
         <Descriptions size="small" bordered={true} extra={extra}>
+          <Descriptions.Item label="Machine Id">{machineId}</Descriptions.Item>
           <Descriptions.Item label="Induction Date">{convertIsoStringToDate(inductionDate)}</Descriptions.Item>
           <Descriptions.Item label="Department">{departmentName}</Descriptions.Item>
           <Descriptions.Item label="Handbook">
