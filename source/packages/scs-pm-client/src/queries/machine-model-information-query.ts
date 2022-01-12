@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export const getAllMachineModelInformationQuery = gql`
-  query danceMetaData {
+  query machineModelMetaData {
     queryResult @rest(type: "MachineModelInformation", path: "machines") {
       identifier
       name

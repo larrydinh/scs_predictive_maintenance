@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="SCSPMCoreTests" tests="1" failures="0" errors="0" time="1.411">
+  <testsuite name="Core: TestSample" errors="0" failures="0" skipped="0" timestamp="2022-01-12T14:29:14" time="0.873" tests="1">
+    <testcase classname="Core: TestSample SampleTestCore" name="Core: TestSample SampleTestCore" time="0.001">
+    </testcase>
+  </testsuite>
+</testsuites>

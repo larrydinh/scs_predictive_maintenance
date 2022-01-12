@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="SCSPMClientTests" tests="2" failures="0" errors="0" time="5.875">
+  <testsuite name="Utils" errors="0" failures="0" skipped="0" timestamp="2022-01-12T14:29:18" time="5.54" tests="2">
+    <testcase classname="Utils Get Machine Export Info For 2 Machines" name="Utils Get Machine Export Info For 2 Machines" time="0.002">
+    </testcase>
+    <testcase classname="Utils Get Machine Export Info For 1 Machine" name="Utils Get Machine Export Info For 1 Machine" time="0">
+    </testcase>
+  </testsuite>
+</testsuites>

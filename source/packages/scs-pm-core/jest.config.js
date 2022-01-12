@@ -5,8 +5,8 @@ module.exports = {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },
   displayName: {
-    name: 'SCSPMServerTests',
-    color: 'magenta',
+    name: 'SCSPMCoreTests',
+    color: 'green',
   },
   collectCoverage: true,
   reporters: [
@@ -14,9 +14,9 @@ module.exports = {
     [
       'jest-junit',
       {
-        suiteName: 'SCSPMServerTests',
+        suiteName: 'SCSPMCoreTests',
         outputDirectory: '../test-results',
-        outputName: 'scs-pm-server-test-report.xml',
+        outputName: 'scs-pm-core-test-report.xml',
       },
     ],
   ],
