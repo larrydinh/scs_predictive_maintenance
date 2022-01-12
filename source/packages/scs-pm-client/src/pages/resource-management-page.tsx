@@ -3,6 +3,7 @@ import { Layout, Selector } from '../components'
 import { AppEntity, getLabelValueFromEnum } from '../models'
 import { AppNavigation } from './app-navigation/app-navigation'
 import './dash-board-page.css'
+import { ResourceManagementProvider } from './resource-management-provider'
 
 export const ResourceManagementPage: React.FC = () => {
   const [entity, setEntity] = useState<string>()
@@ -24,7 +25,7 @@ export const ResourceManagementPage: React.FC = () => {
             />
           </div>
           {entity ? (
-            <p>Selected Entity: {entity}</p>
+            <ResourceManagementProvider entity={entity} />
           ) : (
             <img
               src={`${process.env.PUBLIC_URL}/ic_scs.png`}

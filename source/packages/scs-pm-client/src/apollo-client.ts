@@ -7,7 +7,7 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 global.Headers = Headers
 
-export const apiUrl = process.env.REACT_APP_SERVER_NAME || 'http://localhost:8080/api/'
+export const apiUrl = process.env.REACT_APP_SERVER_NAME || 'http://localhost:8081/api/'
 export type ApolloClientType = 'graphqlClient' | 'restClient'
 
 function getApolloClient(link: RestLink | HttpLink) {
