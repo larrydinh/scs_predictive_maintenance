@@ -1,20 +1,64 @@
 import { Card, Space, Typography } from 'antd'
+import Table, { ColumnProps } from 'antd/lib/table'
 import React from 'react'
-import { MachineModelInformation } from '../../models'
+import { AppEntity, capitalizeFirstCharacter, MachineModelInformation } from '../../models'
 
 interface Props {
-  entityName: string
-  entities: MachineModelInformation[]
+  appEntityName: string
+  dataSource: MachineModelInformation[]
 }
 
-export const ResourceManagementViewer: React.FC<Props> = ({ entityName, entities }: Props) => {
+export const ResourceManagementViewer: React.FC<Props> = ({ appEntityName, dataSource }: Props) => {
+  const getColumns = (): ColumnProps<any>[] => {
+    switch (appEntityName) {
+      case AppEntity.MACHINES:
+      default:
+        const columnKeys = [
+          'name',
+          'givenName',
+          'model',
+          'manufactureYear',
+          'manufacturerName',
+          'purchaseDate',
+          'inductionDate',
+          'departmentName',
+          'description',
+          'operatingManualLink',
+        ]
+        const tableColumns: ColumnProps<any>[] = columnKeys.map(key => {
+          return {
+            title: capitalizeFirstCharacter(key),
+            dataIndex: key,
+            key: key,
+            width: 'auto',
+            render: (text: any) => {
+              if (key === 'name') {
+                return <a>{text}</a>
+              } else if (key === 'operatingManualLink') {
+                return (
+                  <a href={text} rel="noreferrer">
+                    Manual
+                  </a>
+                )
+              } else if (key === 'purchaseDate' || key === 'inductionDate') {
+                return text.substr(0, 10)
+              } else {
+                return text
+              }
+            },
+          }
+        })
+        return tableColumns
+    }
+  }
+
   return (
     <Card
       title={
         <div className="control-panel-container">
           <div className="control-panel">
             <Space align="center">
-              <Typography.Title level={5}>{entityName}</Typography.Title>
+              <Typography.Title level={5}>{appEntityName}</Typography.Title>
             </Space>
           </div>
         </div>
@@ -22,25 +66,18 @@ export const ResourceManagementViewer: React.FC<Props> = ({ entityName, entities
       bordered={true}
       style={{ margin: 9.5, overflowX: 'auto' }}
     >
-      {/* <Table
-        key={this.state.ds.length}
-        expandable={{
-          expandedRowRender: record => <JsonViewer name={entity} json={record as any} />,
-          rowExpandable: record => record.name !== 'Not Expandable',
-        }}
+      <Table
+        key={dataSource.length}
         size={'small'}
-        dataSource={this.state.ds}
-        columns={this.getColumns(entity, schema)}
-        rowSelection={rowSelection}
+        dataSource={dataSource}
+        columns={getColumns()}
         pagination={{
           defaultPageSize: 10,
           showSizeChanger: true,
           pageSizeOptions: ['10', '20', '30'],
         }}
-        footer={() => `Total Items (${getTitle(entity)}): ${this.state.ds.length}`}
-      /> */}
-
-      <p>{JSON.stringify(entities, null, 2)}</p>
+        footer={() => `Total Items (${appEntityName}): ${dataSource.length}`}
+      />
     </Card>
   )
 }

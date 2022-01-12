@@ -20,7 +20,7 @@ export const ResourceManagementProvider: React.FC<Props> = ({ entity }: Props) =
     <QueryProvider query={selectQueryForEntity()}>
       {({ data }) => {
         const machineModelInfo: MachineModelInformation[] = data.queryResult
-        return <ResourceManagementViewer entityName={entity} entities={machineModelInfo} />
+        return <ResourceManagementViewer appEntityName={entity} dataSource={machineModelInfo} />
       }}
     </QueryProvider>
   )
