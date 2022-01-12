@@ -1,6 +1,6 @@
 import { ExportOutlined } from '@ant-design/icons'
 import React from 'react'
-import { IconButton } from '../../components'
+import { IconButton } from '..'
 
 interface Props {
   infoToExport: string
@@ -8,7 +8,7 @@ interface Props {
   toolTip?: string
 }
 
-export const ExportInfoComponent: React.FC<Props> = ({ infoToExport, fileName, toolTip }: Props) => {
+export const ExportFile: React.FC<Props> = ({ infoToExport, fileName, toolTip }: Props) => {
   const exportInformation = () => {
     const hrefUrl = window.URL.createObjectURL(new Blob([infoToExport], { type: 'text/plain' }))
     const link = document.createElement('a')

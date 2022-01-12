@@ -1,31 +1,14 @@
 import React from 'react'
-import { convertIsoStringToDate, MachineModelInformation } from '../../models'
+import { ExportFile } from '../../components'
+import { MachineModelInformation } from '../../models'
+import { getMachineExportInfo } from '../../utils'
 import { DescriptionComponent } from './description-component'
-import { ExportInfoComponent } from './export-info-component'
 
 interface Props {
   machineModelInfo: MachineModelInformation
 }
 
 export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) => {
-  const {
-    name,
-    givenName,
-    model,
-    manufactureYear,
-    manufacturerName,
-    purchaseDate,
-    inductionDate,
-    departmentName,
-    description,
-    operatingManualLink,
-  } = machineModelInfo
-
-  const exportConfig = `Machine with name ${name}, model: ${model}(year: ${manufactureYear}) is purchased from ${manufacturerName} on ${convertIsoStringToDate(
-    purchaseDate,
-  )}.\nThe machine is commissioned on ${convertIsoStringToDate(inductionDate)}, in ${departmentName} department.
-  \nThe machine with in the organization is known as ${givenName}.\nThe machine is best described as ${description} and it's handbook can be found at ${operatingManualLink}`
-
   return (
     <div className="control-panel-container">
       <div className="control-panel">
@@ -33,9 +16,9 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
           <DescriptionComponent
             value={machineModelInfo}
             extra={
-              <ExportInfoComponent
-                infoToExport={exportConfig}
-                fileName={`${givenName}.txt`}
+              <ExportFile
+                infoToExport={getMachineExportInfo([machineModelInfo]).join(`\n\n\n`)}
+                fileName={`${machineModelInfo.givenName}.txt`}
                 toolTip="Export Machine Information"
               />
             }

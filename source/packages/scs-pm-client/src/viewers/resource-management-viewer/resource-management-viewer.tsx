@@ -1,8 +1,9 @@
 import { Card, Space, Typography } from 'antd'
 import Table, { ColumnProps } from 'antd/lib/table'
 import React from 'react'
-import { Hyperlink } from '../../components'
+import { ExportFile, Hyperlink } from '../../components'
 import { AppEntity, capitalizeFirstCharacter, convertIsoStringToDate, MachineModelInformation } from '../../models'
+import { getMachineExportInfo } from '../../utils'
 
 interface Props {
   appEntityName: string
@@ -61,6 +62,13 @@ export const ResourceManagementViewer: React.FC<Props> = ({ appEntityName, dataS
         </div>
       }
       bordered={true}
+      extra={
+        <ExportFile
+          infoToExport={getMachineExportInfo(dataSource).join(`\n\n\n`)}
+          fileName="Machines.txt"
+          toolTip="Export Machine Information"
+        />
+      }
       style={{ margin: 9.5, overflowX: 'auto' }}
     >
       <Table

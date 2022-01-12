@@ -1,5 +1,6 @@
 export * from './button/icon-button'
 export * from './drawer/drawer-provider'
+export * from './export-file/export-file'
 export * from './hyper-link/hyper-link'
 export * from './layout/layout'
 export * from './loading-icon/alert'
