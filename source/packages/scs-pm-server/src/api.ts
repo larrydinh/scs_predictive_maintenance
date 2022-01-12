@@ -19,7 +19,7 @@ function systemInformation(_req: Request, res: Response) {
 function machinesModelInformation(_req: Request, res: Response) {
   try {
     const machinesModelInfo = getAllMachinesModelInformation()
-    res.status(200).json(machinesModelInfo)
+    res.status(200).json({ machines: machinesModelInfo.machines })
   } catch (err) {
     const errorMessage = `Unable to fetch the machines model information due to: ${
       (err as Error).message

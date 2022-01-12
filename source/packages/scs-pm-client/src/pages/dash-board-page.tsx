@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { DashboardViewer } from 'src/viewers'
 import { Layout, QueryProvider, Selector } from '../components'
-import { MachineModelInformation } from '../models'
+import { MachineModelInfoResponse, MachineModelInformation } from '../models'
 import { getAllMachineModelInformationQuery } from '../queries'
 import { AppNavigation } from './app-navigation/app-navigation'
 import './dash-board-page.css'
@@ -11,7 +11,7 @@ export const DashBoardPage: React.FC = () => {
   return (
     <QueryProvider query={getAllMachineModelInformationQuery}>
       {({ data }) => {
-        const machineModelInfo: MachineModelInformation[] = data.queryResult
+        const machineModelInfo: MachineModelInformation[] = (data.queryResult as MachineModelInfoResponse).machines
         return (
           <Layout name="Dashboard" appNavigation={<AppNavigation />}>
             <div className="control-panel-container">

@@ -1,6 +1,6 @@
 import React from 'react'
 import { QueryProvider } from '../components'
-import { AppEntity, MachineModelInformation } from '../models'
+import { AppEntity, MachineModelInfoResponse, MachineModelInformation } from '../models'
 import { getAllMachineModelInformationQuery } from '../queries'
 import { ResourceManagementViewer } from '../viewers'
 
@@ -19,7 +19,7 @@ export const ResourceManagementProvider: React.FC<Props> = ({ entity }: Props) =
   return (
     <QueryProvider query={selectQueryForEntity()}>
       {({ data }) => {
-        const machineModelInfo: MachineModelInformation[] = data.queryResult
+        const machineModelInfo: MachineModelInformation[] = (data.queryResult as MachineModelInfoResponse).machines
         return <ResourceManagementViewer appEntityName={entity} dataSource={machineModelInfo} />
       }}
     </QueryProvider>
