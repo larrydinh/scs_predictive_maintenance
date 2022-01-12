@@ -1,9 +1,9 @@
 import { Select } from 'antd'
 import * as React from 'react'
-import { MinimalComponentProps } from '../../models/component'
+import { LabelValue, MinimalComponentProps } from '../../models'
 
 interface SelectorProps extends MinimalComponentProps {
-  domainValues: string[]
+  domainValues: LabelValue[]
   selectedValue: string | undefined
   placeholder?: string
   onValueChanged?: (value: string) => void
@@ -27,8 +27,8 @@ export const Selector: React.FC<SelectorProps> = ({
     onSearch={() => undefined}
   >
     {domainValues.map(domainValue => (
-      <Select.Option key={domainValue} value={domainValue}>
-        {domainValue}
+      <Select.Option key={domainValue.value} value={domainValue.value}>
+        {domainValue.label}
       </Select.Option>
     ))}
   </Select>

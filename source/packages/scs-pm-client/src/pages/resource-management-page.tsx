@@ -15,11 +15,10 @@ export const ResourceManagementPage: React.FC = () => {
           <div className="control-panel">
             <Selector
               style={{ flex: 1, marginRight: '10px' }}
-              domainValues={getLabelValueFromEnum(AppEntity).map(f => f.label)}
+              domainValues={getLabelValueFromEnum(AppEntity)}
               selectedValue={entity || 'Select An Entity'}
               placeholder="Select An Entity"
               onValueChanged={selectedEntity => {
-                console.log(`selectedEntity: ${selectedEntity}`)
                 setEntity(selectedEntity)
               }}
             />
