@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { DashboardViewer } from 'src/viewers'
 import { Layout, QueryProvider, Selector } from '../components'
 import { MachineModelInformation } from '../models'
 import { getAllMachineModelInformationQuery } from '../queries'
@@ -26,7 +27,6 @@ export const DashBoardPage: React.FC = () => {
                   selectedValue={machine?.identifier || 'Select A Machine'}
                   placeholder="Select An Entity"
                   onValueChanged={selectedMachineIdentifier => {
-                    console.log(`Selected Machine: ${JSON.stringify(selectedMachineIdentifier, null, 2)}`)
                     const selectedMachine = machineModelInfo.filter(
                       mac => mac.identifier === selectedMachineIdentifier,
                     )[0]
@@ -35,7 +35,7 @@ export const DashBoardPage: React.FC = () => {
                 />
               </div>
               {machine ? (
-                <p>{JSON.stringify(machine, null, 2)}</p>
+                <DashboardViewer machineModelInfo={machine} />
               ) : (
                 <img
                   src={`${process.env.PUBLIC_URL}/ic_scs.png`}
