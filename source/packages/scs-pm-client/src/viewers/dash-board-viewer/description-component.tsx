@@ -5,9 +5,10 @@ import { convertIsoStringToDate, MachineModelInformation } from '../../models'
 
 interface Props {
   value: MachineModelInformation
+  extra?: React.ReactNode
 }
 
-export const DescriptionComponent: React.FC<Props> = ({ value }: Props) => {
+export const DescriptionComponent: React.FC<Props> = ({ value, extra }: Props) => {
   const { givenName, inductionDate, departmentName, description, operatingManualLink } = value
   return (
     <Collapse
@@ -19,7 +20,7 @@ export const DescriptionComponent: React.FC<Props> = ({ value }: Props) => {
       }}
     >
       <Collapse.Panel header={`Machine Synopsis: (${givenName})`} key="1">
-        <Descriptions size="small" bordered={true}>
+        <Descriptions size="small" bordered={true} extra={extra}>
           <Descriptions.Item label="Induction Date">{convertIsoStringToDate(inductionDate)}</Descriptions.Item>
           <Descriptions.Item label="Department">{departmentName}</Descriptions.Item>
           <Descriptions.Item label="Handbook">
