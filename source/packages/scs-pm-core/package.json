@@ -5,6 +5,7 @@
   "main": "build/dist/index.js",
   "typings": "build/dist/index.d.ts",
   "scripts": {
+    "postinstall": "npm run build",
     "build": "tsc",
     "lint": "eslint src",
     "prettier": "prettier --write '**/*.{ts,js}'",

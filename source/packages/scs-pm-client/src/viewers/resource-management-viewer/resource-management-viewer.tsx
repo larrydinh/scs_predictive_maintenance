@@ -1,7 +1,8 @@
 import { Card, Space, Typography } from 'antd'
 import Table, { ColumnProps } from 'antd/lib/table'
 import React from 'react'
-import { AppEntity, capitalizeFirstCharacter, MachineModelInformation } from '../../models'
+import { Hyperlink } from '../../components'
+import { AppEntity, capitalizeFirstCharacter, convertIsoStringToDate, MachineModelInformation } from '../../models'
 
 interface Props {
   appEntityName: string
@@ -35,13 +36,9 @@ export const ResourceManagementViewer: React.FC<Props> = ({ appEntityName, dataS
               if (key === 'name') {
                 return <a>{text}</a>
               } else if (key === 'operatingManualLink') {
-                return (
-                  <a href={text} rel="noreferrer">
-                    Manual
-                  </a>
-                )
+                return <Hyperlink title="Manual" url={text} />
               } else if (key === 'purchaseDate' || key === 'inductionDate') {
-                return text.substr(0, 10)
+                return convertIsoStringToDate(text)
               } else {
                 return text
               }
