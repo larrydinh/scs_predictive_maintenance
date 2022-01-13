@@ -19,7 +19,7 @@ In the predictive maintenance project logical flows and user functionalities tha
 
 The computational process of the functional point analysis will be detailed out in end of the document.
 
-![alt text](https://raw.githubusercontent.com/amittkSharma/scs_predictive_maintenance/develop/docmentation/artifacts/functional-point-analysis-chart.png?token=GHSAT0AAAAAABNYOYR5VASU6FTYSM5LFWCGYO7MZPA)
+![alt text](./functional-point-analysis-chart.png)
 
 The detail description of the image as per the functional point analysis:
 
