@@ -1,4 +1,5 @@
 export * from './button/icon-button'
+export * from './charts/line-plot-with-slider'
 export * from './drawer/drawer-provider'
 export * from './export-file/export-file'
 export * from './hyper-link/hyper-link'
