@@ -14,10 +14,14 @@ export const config = {
     logsFileName: 'scs-pm-server-logs.txt',
     machinesDirectory: 'machines',
     machinesFileName: 'scs-pm-machines.json',
+    machineVitals: 'telemetry.csv',
+    machineLogs: 'logs.csv',
   },
   rawData: {
     path: `${__dirname}/raw-data/`,
     machineDummyData: 'dummy-machine.json',
+    machineDummyLogs: 'logs.csv',
+    machineDummyVitals: 'telemetry.csv',
   },
   getAppsDirectory(): string {
     return path.join(config.app.homeDir, config.app.appDirectory)

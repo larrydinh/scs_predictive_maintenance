@@ -14,6 +14,7 @@ export function getAllMachinesModelInformation(): MachineModelInfoResponse {
   const machinesModelInfo = readFile(
     machinesModelInfoPath,
     config.app.machinesFileName,
+    'JSON',
   ) as MachineModelInfoResponse
   return machinesModelInfo
 }
