@@ -52,6 +52,7 @@ function machineVitalsInformation(req: Request, res: Response) {
   try {
     log.info(`Vitals for machine id:${machineId} are requested`)
     getMachineVitals(machineId as string, (data: MachineTelemetry[]) => {
+      log.info(`Total ${data.length} vitals are found for machine id:${machineId}`)
       res.status(200).json({ machineVitals: data })
     })
   } catch (err) {
@@ -68,6 +69,7 @@ function machineLogsInformation(req: Request, res: Response) {
   try {
     log.info(`Logs for machine id:${machineId} are requested`)
     getMachineLogs(machineId as string, (data: MachineLog[]) => {
+      log.info(`Total ${data.length} logs are found for machine id:${machineId}`)
       res.status(200).json({ machineLogs: data })
     })
   } catch (err) {
