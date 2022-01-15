@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="SCSPMCoreTests" tests="1" failures="0" errors="0" time="2.27">
-  <testsuite name="Core: TestSample" errors="0" failures="0" skipped="0" timestamp="2022-01-15T23:08:57" time="0.95" tests="1">
-    <testcase classname="Core: TestSample SampleTestCore" name="Core: TestSample SampleTestCore" time="0.002">
+<testsuites name="SCSPMCoreTests" tests="7" failures="0" errors="0" time="2.543">
+  <testsuite name="Utils" errors="0" failures="0" skipped="0" timestamp="2022-01-15T23:26:29" time="1.815" tests="7">
+    <testcase classname="Utils Capitalize first character, with lowercase string" name="Utils Capitalize first character, with lowercase string" time="0.002">
+    </testcase>
+    <testcase classname="Utils Capitalize first character, with uppercase string" name="Utils Capitalize first character, with uppercase string" time="0">
+    </testcase>
+    <testcase classname="Utils Capitalize first character, with complete uppercase string" name="Utils Capitalize first character, with complete uppercase string" time="0.001">
+    </testcase>
+    <testcase classname="Utils Capitalize first character, with complete lowercase string" name="Utils Capitalize first character, with complete lowercase string" time="0">
+    </testcase>
+    <testcase classname="Utils Clone JSON" name="Utils Clone JSON" time="0.001">
+    </testcase>
+    <testcase classname="Utils Get label value from enum with single value" name="Utils Get label value from enum with single value" time="0">
+    </testcase>
+    <testcase classname="Utils Get label value from enum with single value" name="Utils Get label value from enum with single value" time="0.001">
     </testcase>
   </testsuite>
 </testsuites>
