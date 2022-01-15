@@ -1,22 +1,29 @@
 import { parse } from 'csv-parse'
 import * as fs from 'fs'
 import { log } from '../logger'
+import { getErrorMessage, MachineTelemetry } from '../models'
 
-export function getCSVData(csvFilePath: string, headers: string[]) {
-  const fileContent = fs.readFileSync(csvFilePath, { encoding: 'utf-8' })
+export function getCSVData(
+  csvFilePath: string,
+  headers: string[],
+  callback: (f: MachineTelemetry[]) => void,
+) {
+  const csvData: MachineTelemetry[] = []
 
-  parse(
-    fileContent,
-    {
-      delimiter: ',',
-      columns: headers,
-    },
-    (error, result: any[]) => {
-      if (error) {
-        log.error(`Unable to read the file present at ${csvFilePath} due to ${error.message}`)
-      }
-
-      console.log('Result', JSON.stringify(result, null, 2))
-    },
-  )
+  try {
+    fs.createReadStream(csvFilePath)
+      .on('error', err => {
+        log.error(`Unable to read the file at ${csvFilePath} due to error: ${getErrorMessage(err)}`)
+        callback(csvData)
+      })
+      .pipe(parse({ delimiter: ',', columns: headers }))
+      .on('data', (csvRow: MachineTelemetry) => {
+        csvData.push(csvRow)
+      })
+      .on('end', () => {
+        callback(csvData)
+      })
+  } catch (error: unknown) {
+    log.error(`Unable to read the file at ${csvFilePath} due to error: ${getErrorMessage(error)}`)
+  }
 }

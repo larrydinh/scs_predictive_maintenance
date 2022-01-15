@@ -16,6 +16,16 @@ export const config = {
     machinesFileName: 'scs-pm-machines.json',
     machineVitals: 'telemetry.csv',
     machineLogs: 'logs.csv',
+    telemetryHeaders: [
+      'timestamp',
+      'speed_desired',
+      'ambient_temperature',
+      'ambient_pressure',
+      'speed',
+      'temperature',
+      'pressure',
+      'machineID',
+    ],
   },
   rawData: {
     path: `${__dirname}/raw-data/`,

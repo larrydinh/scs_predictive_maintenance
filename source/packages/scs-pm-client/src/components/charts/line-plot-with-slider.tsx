@@ -1,25 +1,25 @@
-import { Line } from '@ant-design/charts'
+import { Line, LineConfig } from '@ant-design/charts'
 import React from 'react'
 
-interface LinePlotData {
-  x: string | number
-  y: string | number
-}
-
 interface Props {
-  data: LinePlotData[]
+  data: any[]
   xField: string
   yField: string
   tickCount: number
 }
 
 export const LinePlotWithSlider: React.FC<Props> = ({ data, xField, yField, tickCount }: Props) => {
-  const config = {
+  const config: LineConfig = {
     data,
     xField,
     yField,
     xAxis: {
       tickCount,
+    },
+    legend: {
+      layout: 'horizontal',
+
+      position: 'top',
     },
     slider: {
       start: 0.1,
@@ -27,7 +27,7 @@ export const LinePlotWithSlider: React.FC<Props> = ({ data, xField, yField, tick
     },
   }
   return (
-    <div style={{ padding: 10, width: 'auto', height: 170 }}>
+    <div style={{ padding: 10, width: 'auto', height: 200 }}>
       <Line {...config} />
     </div>
   )

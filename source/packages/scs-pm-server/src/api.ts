@@ -1,7 +1,11 @@
 import { Request, Response, Router } from 'express'
-import { MachineModelInformation } from 'scs-pm-core'
+import { getErrorMessage, MachineModelInformation, MachineTelemetry } from 'scs-pm-core'
 import { log } from './logger'
-import { addNewMachineToExistingMachines, getAllMachinesModelInformation } from './machine'
+import {
+  addNewMachineToExistingMachines,
+  getAllMachinesModelInformation,
+  getMachineVitals,
+} from './machine'
 import { getVersionInformation, verifySystem } from './system'
 
 export const api = Router()
@@ -36,7 +40,23 @@ function addNewMachine(req: Request, res: Response) {
 
     res.status(200).json({ machines: updatedMachines })
   } catch (err) {
-    const errorMessage = `Unable to add new machine to the system due t0: ${(err as Error).message}`
+    const errorMessage = `Unable to add new machine to the system due t: ${getErrorMessage(err)}`
+    log.error(errorMessage)
+    res.status(500).json({ error: errorMessage })
+  }
+}
+
+function machineVitalsInformation(req: Request, res: Response) {
+  const { machineId } = req.query
+  try {
+    log.info(`Vitals for machine id:${machineId} are requested`)
+    getMachineVitals(machineId as string, (data: MachineTelemetry[]) => {
+      res.status(200).json({ machineVitals: data })
+    })
+  } catch (err) {
+    const errorMessage = `Unable to get the vitals for the machine ${machineId} due to: ${getErrorMessage(
+      err,
+    )}`
     log.error(errorMessage)
     res.status(500).json({ error: errorMessage })
   }
@@ -45,4 +65,5 @@ function addNewMachine(req: Request, res: Response) {
 api.get('/verify', verifyServerSetup)
 api.get('/version', systemInformation)
 api.get('/machines', machinesModelInformation)
+api.get('/machineVitals', machineVitalsInformation)
 api.post('/addMachine', addNewMachine)

@@ -8,6 +8,9 @@ http://localhost:8081/api/version
 ### Get all machines model information
 http://localhost:8081/api/machines
 
+### Get machine vitals for a specific machine
+http://localhost:8081/api/machineVitals?machineId=M_0054
+
 
 ###
 POST http://localhost:8081/api/addMachine

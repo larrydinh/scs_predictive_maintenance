@@ -1,6 +1,5 @@
-import * as path from 'path'
 import { config } from './config'
-import { createDirectory, createFile, getCSVData, readFile } from './utils'
+import { createDirectory, createFile, readFile } from './utils'
 
 export function initialize() {
   createDirectory(config.app.homeDir, config.app.appDirectory)
@@ -21,15 +20,4 @@ export function initialize() {
     config.app.machineLogs,
     readFile(config.rawData.path, config.rawData.machineDummyLogs, 'CSV'),
   )
-  // TODO: Read this data in the api call to get machine specific data
-  getCSVData(path.join(config.getMachinesDirectory(), config.app.machineVitals), [
-    'timestamp',
-    'speed_desired',
-    'ambient_temperature',
-    'ambient_pressure',
-    'speed',
-    'temperature',
-    'pressure',
-    'machineID',
-  ])
 }
