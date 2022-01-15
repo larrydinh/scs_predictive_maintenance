@@ -1,60 +1,36 @@
 import { Table } from 'antd'
-import React, { useEffect, useState } from 'react'
-import { client } from '../../apollo-client'
-import { Alert } from '../../components'
-import { capitalizeFirstCharacter, MachineLog, MachineLogsResponse } from '../../models'
-import { getMachineLogsByMachineId } from '../../queries'
+import React from 'react'
+import { capitalizeFirstCharacter, MachineLog } from '../../models'
 
 interface Props {
-  machineId: string
+  data: MachineLog[]
 }
 
-export const LogsViewer: React.FC<Props> = ({ machineId }: Props) => {
-  const [data, setData] = useState<MachineLog[]>()
-
-  useEffect(() => {
-    const queryCall = async () => {
-      const result = await client.query({ query: getMachineLogsByMachineId(machineId) })
-      const r = result.data.queryResult as MachineLogsResponse
-      setData(r.machineLogs)
-    }
-    queryCall()
-  }, [machineId])
-
+export const LogsViewer: React.FC<Props> = ({ data }: Props) => {
   const getColumns = () => {
-    if (data && data.length !== 0) {
-      const columnHeaders = Object.keys(data[data.length - 1])
-      return columnHeaders.map(header => {
-        return {
-          title: capitalizeFirstCharacter(header),
-          dataIndex: header,
-          key: header,
-          width: 'auto',
-        }
-      })
-    } else {
-      return []
-    }
+    const columnHeaders = Object.keys(data[data.length - 1])
+    return columnHeaders.map(header => {
+      return {
+        title: capitalizeFirstCharacter(header),
+        dataIndex: header,
+        key: header,
+        width: 'auto',
+      }
+    })
   }
 
   return (
-    <>
-      {data && data.length !== 0 ? (
-        <Table
-          key={data.length}
-          size={'small'}
-          dataSource={data}
-          columns={getColumns()}
-          pagination={{
-            defaultPageSize: 10,
-            showSizeChanger: true,
-            pageSizeOptions: ['10', '20', '30'],
-          }}
-          footer={() => `Total Logs(#): ${data.length}`}
-        />
-      ) : (
-        <Alert message="No Logs is Found" />
-      )}
-    </>
+    <Table
+      key={data.length}
+      size={'small'}
+      dataSource={data}
+      columns={getColumns()}
+      pagination={{
+        defaultPageSize: 10,
+        showSizeChanger: true,
+        pageSizeOptions: ['10', '20', '30'],
+      }}
+      footer={() => `Total Logs(#): ${data.length}`}
+    />
   )
 }

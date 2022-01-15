@@ -2,8 +2,14 @@ import { Alert, Col, Collapse, Row } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { client } from '../../apollo-client'
 import { ExportFile, LinePlotWithSlider, MultiLinePlot } from '../../components'
-import { MachineModelInformation, MachineTelemetry, MachineVitalsResponse } from '../../models'
-import { getMachineVitalsByMachineId } from '../../queries'
+import {
+  MachineLog,
+  MachineLogsResponse,
+  MachineModelInformation,
+  MachineTelemetry,
+  MachineVitalsResponse,
+} from '../../models'
+import { getMachineLogsByMachineId, getMachineVitalsByMachineId } from '../../queries'
 import { getMachineExportInfo } from '../../utils'
 import { DescriptionComponent } from './description-component'
 import { LogsViewer } from './logs-viewer'
@@ -19,17 +25,25 @@ const collapseStyle: React.CSSProperties = {
 }
 
 export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) => {
-  const [data, setData] = useState<MachineTelemetry[]>()
+  const [vitals, setVitals] = useState<MachineTelemetry[]>()
+  const [logs, setLogs] = useState<MachineLog[]>()
 
   useEffect(() => {
+    const { machineId } = machineModelInfo
+
     const queryCall = async () => {
-      const result = await client.query({ query: getMachineVitalsByMachineId(machineModelInfo.machineId) })
-      console.log(`Result: ${JSON.stringify(result, null, 2)}`)
-      const r = result.data.queryResult as MachineVitalsResponse
-      setData(r.machineVitals)
+      const machineVitalsQueryResult = await client.query({
+        query: getMachineVitalsByMachineId(machineId),
+      })
+      const machineVitalsResult = machineVitalsQueryResult.data.queryResult as MachineVitalsResponse
+      setVitals(machineVitalsResult.machineVitals)
+
+      const machineLogsQueryResult = await client.query({ query: getMachineLogsByMachineId(machineId) })
+      const machineLogsResult = machineLogsQueryResult.data.queryResult as MachineLogsResponse
+      setLogs(machineLogsResult.machineLogs)
     }
     queryCall()
-  }, [machineModelInfo.machineId])
+  }, [machineModelInfo])
 
   return (
     <>
@@ -53,9 +67,9 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
         <Col span={12}>
           <Collapse defaultActiveKey="1" style={collapseStyle}>
             <Collapse.Panel header="Temperature" key="1">
-              {data ? (
+              {vitals ? (
                 <LinePlotWithSlider
-                  data={data.map(z => {
+                  data={vitals.map(z => {
                     return {
                       Date: z.timestamp,
                       temperature: z.temperature,
@@ -66,7 +80,7 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
                   tickCount={5}
                 />
               ) : (
-                <Alert message="No Data is Found" />
+                <Alert message="Data is un-available" />
               )}
             </Collapse.Panel>
           </Collapse>
@@ -74,9 +88,9 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
         <Col span={12}>
           <Collapse defaultActiveKey="1" style={collapseStyle}>
             <Collapse.Panel header="Pressure" key="1">
-              {data ? (
+              {vitals ? (
                 <LinePlotWithSlider
-                  data={data.map(z => {
+                  data={vitals.map(z => {
                     return {
                       Date: z.timestamp,
                       pressure: z.pressure,
@@ -87,7 +101,7 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
                   tickCount={5}
                 />
               ) : (
-                <Alert message="No Data is Found" />
+                <Alert message="Data is un-available" />
               )}
             </Collapse.Panel>
           </Collapse>
@@ -97,9 +111,9 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
         <Col span={12}>
           <Collapse defaultActiveKey="1" style={collapseStyle}>
             <Collapse.Panel header="Speed" key="1">
-              {data ? (
+              {vitals ? (
                 <LinePlotWithSlider
-                  data={data.map(z => {
+                  data={vitals.map(z => {
                     return {
                       Date: z.timestamp,
                       speed: z.speed,
@@ -110,7 +124,7 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
                   tickCount={5}
                 />
               ) : (
-                <Alert message="No Data is Found" />
+                <Alert message="Data is un-available" />
               )}
             </Collapse.Panel>
           </Collapse>
@@ -119,9 +133,9 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
         <Col span={12}>
           <Collapse defaultActiveKey="1" style={collapseStyle}>
             <Collapse.Panel header="Pressure Vs Ambient Pressure" key="1">
-              {data ? (
+              {vitals ? (
                 <MultiLinePlot
-                  data={data.map(z => {
+                  data={vitals.map(z => {
                     return {
                       Date: z.timestamp,
                       pressure: z.pressure,
@@ -133,7 +147,7 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
                   tickCount={5}
                 />
               ) : (
-                <Alert message="No Data is Found" />
+                <Alert message="Data is un-available" />
               )}
             </Collapse.Panel>
           </Collapse>
@@ -143,7 +157,7 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
         <Col span={24}>
           <Collapse defaultActiveKey="1" style={collapseStyle}>
             <Collapse.Panel header="Logs" key="1">
-              <LogsViewer machineId={machineModelInfo.machineId} />
+              {logs ? <LogsViewer data={logs} /> : <Alert message="Logs are un-available" />}
             </Collapse.Panel>
           </Collapse>
         </Col>
