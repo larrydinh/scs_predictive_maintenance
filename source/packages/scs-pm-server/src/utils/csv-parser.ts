@@ -1,14 +1,10 @@
 import { parse } from 'csv-parse'
 import * as fs from 'fs'
 import { log } from '../logger'
-import { getErrorMessage, MachineTelemetry } from '../models'
+import { getErrorMessage } from '../models'
 
-export function getCSVData(
-  csvFilePath: string,
-  headers: string[],
-  callback: (f: MachineTelemetry[]) => void,
-) {
-  const csvData: MachineTelemetry[] = []
+export function getCSVData<T>(csvFilePath: string, headers: string[], callback: (f: T[]) => void) {
+  const csvData: T[] = []
 
   try {
     fs.createReadStream(csvFilePath)
@@ -17,7 +13,7 @@ export function getCSVData(
         callback(csvData)
       })
       .pipe(parse({ delimiter: ',', columns: headers }))
-      .on('data', (csvRow: MachineTelemetry) => {
+      .on('data', (csvRow: T) => {
         csvData.push(csvRow)
       })
       .on('end', () => {

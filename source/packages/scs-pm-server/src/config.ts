@@ -26,6 +26,7 @@ export const config = {
       'pressure',
       'machineID',
     ],
+    logHeaders: ['timestamp', 'machineID', 'level', 'code'],
   },
   rawData: {
     path: `${__dirname}/raw-data/`,

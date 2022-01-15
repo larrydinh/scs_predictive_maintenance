@@ -6,6 +6,7 @@ import { MachineModelInformation, MachineTelemetry, MachineVitalsResponse } from
 import { getMachineVitalsByMachineId } from '../../queries'
 import { getMachineExportInfo } from '../../utils'
 import { DescriptionComponent } from './description-component'
+import { LogsViewer } from './logs-viewer'
 
 interface Props {
   machineModelInfo: MachineModelInformation
@@ -134,6 +135,15 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
               ) : (
                 <Alert message="No Data is Found" />
               )}
+            </Collapse.Panel>
+          </Collapse>
+        </Col>
+      </Row>
+      <Row style={{ marginTop: 8, marginLeft: 10, marginRight: 10 }} gutter={4}>
+        <Col span={24}>
+          <Collapse defaultActiveKey="1" style={collapseStyle}>
+            <Collapse.Panel header="Logs" key="1">
+              <LogsViewer machineId={machineModelInfo.machineId} />
             </Collapse.Panel>
           </Collapse>
         </Col>
