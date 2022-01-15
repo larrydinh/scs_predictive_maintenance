@@ -1,7 +1,9 @@
-import { Col, Collapse, Row } from 'antd'
+import { Alert, Col, Collapse, Row } from 'antd'
 import React, { useEffect, useState } from 'react'
-import { ExportFile, LinePlotWithSlider } from '../../components'
-import { MachineModelInformation } from '../../models'
+import { client } from '../../apollo-client'
+import { ExportFile, LinePlotWithSlider, MultiLinePlot } from '../../components'
+import { MachineModelInformation, MachineTelemetry, MachineVitalsResponse } from '../../models'
+import { getMachineVitalsByMachineId } from '../../queries'
 import { getMachineExportInfo } from '../../utils'
 import { DescriptionComponent } from './description-component'
 
@@ -16,19 +18,17 @@ const collapseStyle: React.CSSProperties = {
 }
 
 export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) => {
-  const [data, setData] = useState([])
+  const [data, setData] = useState<MachineTelemetry[]>()
 
-  const asyncFetch = () => {
-    fetch('https://gw.alipayobjects.com/os/bmw-prod/1d565782-dde4-4bb6-8946-ea6a38ccf184.json')
-      .then(response => response.json())
-      .then(json => setData(json))
-      .catch(error => {
-        console.log('fetch data failed', error)
-      })
-  }
   useEffect(() => {
-    asyncFetch()
-  }, [])
+    const queryCall = async () => {
+      const result = await client.query({ query: getMachineVitalsByMachineId(machineModelInfo.machineId) })
+      console.log(`Result: ${JSON.stringify(result, null, 2)}`)
+      const r = result.data.queryResult as MachineVitalsResponse
+      setData(r.machineVitals)
+    }
+    queryCall()
+  }, [machineModelInfo.machineId])
 
   return (
     <>
@@ -52,14 +52,42 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
         <Col span={12}>
           <Collapse defaultActiveKey="1" style={collapseStyle}>
             <Collapse.Panel header="Temperature" key="1">
-              <LinePlotWithSlider data={data} xField="Date" yField="scales" tickCount={5} />
+              {data ? (
+                <LinePlotWithSlider
+                  data={data.map(z => {
+                    return {
+                      Date: z.timestamp,
+                      temperature: z.temperature,
+                    }
+                  })}
+                  xField="Date"
+                  yField="temperature"
+                  tickCount={5}
+                />
+              ) : (
+                <Alert message="No Data is Found" />
+              )}
             </Collapse.Panel>
           </Collapse>
         </Col>
         <Col span={12}>
           <Collapse defaultActiveKey="1" style={collapseStyle}>
             <Collapse.Panel header="Pressure" key="1">
-              <LinePlotWithSlider data={data} xField="Date" yField="scales" tickCount={5} />
+              {data ? (
+                <LinePlotWithSlider
+                  data={data.map(z => {
+                    return {
+                      Date: z.timestamp,
+                      pressure: z.pressure,
+                    }
+                  })}
+                  xField="Date"
+                  yField="pressure"
+                  tickCount={5}
+                />
+              ) : (
+                <Alert message="No Data is Found" />
+              )}
             </Collapse.Panel>
           </Collapse>
         </Col>
@@ -68,14 +96,44 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
         <Col span={12}>
           <Collapse defaultActiveKey="1" style={collapseStyle}>
             <Collapse.Panel header="Speed" key="1">
-              <LinePlotWithSlider data={data} xField="Date" yField="scales" tickCount={5} />
+              {data ? (
+                <LinePlotWithSlider
+                  data={data.map(z => {
+                    return {
+                      Date: z.timestamp,
+                      speed: z.speed,
+                    }
+                  })}
+                  xField="Date"
+                  yField="speed"
+                  tickCount={5}
+                />
+              ) : (
+                <Alert message="No Data is Found" />
+              )}
             </Collapse.Panel>
           </Collapse>
         </Col>
+
         <Col span={12}>
           <Collapse defaultActiveKey="1" style={collapseStyle}>
-            <Collapse.Panel header="Desired Speed" key="1">
-              <LinePlotWithSlider data={data} xField="Date" yField="scales" tickCount={5} />
+            <Collapse.Panel header="Pressure Vs Ambient Pressure" key="1">
+              {data ? (
+                <MultiLinePlot
+                  data={data.map(z => {
+                    return {
+                      Date: z.timestamp,
+                      pressure: z.pressure,
+                      ambientPressure: z.ambient_pressure,
+                    }
+                  })}
+                  xField="Date"
+                  yField={['pressure', 'ambientPressure']}
+                  tickCount={5}
+                />
+              ) : (
+                <Alert message="No Data is Found" />
+              )}
             </Collapse.Panel>
           </Collapse>
         </Col>

@@ -1,8 +1,8 @@
 import * as path from 'path'
-import { MachineModelInfoResponse, MachineModelInformation } from 'scs-pm-core'
+import { MachineModelInfoResponse, MachineModelInformation, MachineTelemetry } from 'scs-pm-core'
 import { config } from '../config'
 import { log } from '../logger'
-import { getDirectoryPath, readFile, writeFile } from '../utils'
+import { getCSVData, getDirectoryPath, readFile, writeFile } from '../utils'
 
 export function getAllMachinesModelInformation(): MachineModelInfoResponse {
   const machinesModelInfoPath = path.join(
@@ -14,6 +14,7 @@ export function getAllMachinesModelInformation(): MachineModelInfoResponse {
   const machinesModelInfo = readFile(
     machinesModelInfoPath,
     config.app.machinesFileName,
+    'JSON',
   ) as MachineModelInfoResponse
   return machinesModelInfo
 }
@@ -38,4 +39,18 @@ export function addNewMachineToExistingMachines(
   }
 
   return existingMachines
+}
+
+export function getMachineVitals(
+  machineId: string,
+  callBack: (machineVitals: MachineTelemetry[]) => void,
+) {
+  getCSVData(
+    path.join(config.getMachinesDirectory(), config.app.machineVitals),
+    config.app.telemetryHeaders,
+    (data: MachineTelemetry[]) => {
+      const machineVitals = data.filter(mac => mac.machineID === machineId)
+      callBack(machineVitals)
+    },
+  )
 }
