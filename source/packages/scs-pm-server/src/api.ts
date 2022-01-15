@@ -1,9 +1,10 @@
 import { Request, Response, Router } from 'express'
-import { getErrorMessage, MachineModelInformation, MachineTelemetry } from 'scs-pm-core'
+import { getErrorMessage, MachineLog, MachineModelInformation, MachineTelemetry } from 'scs-pm-core'
 import { log } from './logger'
 import {
   addNewMachineToExistingMachines,
   getAllMachinesModelInformation,
+  getMachineLogs,
   getMachineVitals,
 } from './machine'
 import { getVersionInformation, verifySystem } from './system'
@@ -62,8 +63,25 @@ function machineVitalsInformation(req: Request, res: Response) {
   }
 }
 
+function machineLogsInformation(req: Request, res: Response) {
+  const { machineId } = req.query
+  try {
+    log.info(`Logs for machine id:${machineId} are requested`)
+    getMachineLogs(machineId as string, (data: MachineLog[]) => {
+      res.status(200).json({ machineLogs: data })
+    })
+  } catch (err) {
+    const errorMessage = `Unable to get the logs for the machine ${machineId} due to: ${getErrorMessage(
+      err,
+    )}`
+    log.error(errorMessage)
+    res.status(500).json({ error: errorMessage })
+  }
+}
+
 api.get('/verify', verifyServerSetup)
 api.get('/version', systemInformation)
 api.get('/machines', machinesModelInformation)
 api.get('/machineVitals', machineVitalsInformation)
+api.get('/machineLogs', machineLogsInformation)
 api.post('/addMachine', addNewMachine)
