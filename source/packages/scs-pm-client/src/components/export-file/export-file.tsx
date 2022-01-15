@@ -23,7 +23,10 @@ export const ExportFile: React.FC<Props> = ({ infoToExport, fileName, toolTip }:
       key="exportConfiguration"
       style={{ marginTop: 5, marginRight: 5 }}
       toolTip={toolTip || 'Export'}
-      onClick={exportInformation}
+      onClick={e => {
+        e.stopPropagation()
+        exportInformation()
+      }}
       icon={<ExportOutlined />}
     />
   )

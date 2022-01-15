@@ -1,9 +1,7 @@
-import { ExceptionOutlined, ProjectOutlined } from '@ant-design/icons'
-import { Alert, Col, Collapse, Row, Space } from 'antd'
+import { Alert, Col, Collapse, Row } from 'antd'
 import React, { useEffect, useState } from 'react'
-import { CSVLink } from 'react-csv'
 import { client } from '../../apollo-client'
-import { ExportFile, IconButton, LinePlotWithSlider, MultiLinePlot } from '../../components'
+import { LinePlotWithSlider, MultiLinePlot } from '../../components'
 import {
   MachineLog,
   MachineLogsResponse,
@@ -12,8 +10,8 @@ import {
   MachineVitalsResponse,
 } from '../../models'
 import { getMachineLogsByMachineId, getMachineVitalsByMachineId } from '../../queries'
-import { getMachineExportInfo } from '../../utils'
 import { DescriptionComponent } from './description-component'
+import { ExportMachineInfoComponent } from './export-machine-info-component'
 import { LogsViewer } from './logs-viewer'
 interface Props {
   machineModelInfo: MachineModelInformation
@@ -53,32 +51,7 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
           <Collapse.Panel
             header={`Machine Synopsis (${machineModelInfo.givenName})`}
             key="1"
-            extra={
-              <Space size="small">
-                <ExportFile
-                  infoToExport={getMachineExportInfo([machineModelInfo]).join(`\n\n\n`)}
-                  fileName={`info_${machineModelInfo.givenName}_${new Date().toLocaleDateString()}.txt`}
-                  toolTip={`Export  ${machineModelInfo.givenName} Information`}
-                />
-                {vitals && (
-                  <CSVLink
-                    data={vitals}
-                    filename={`vitals_${machineModelInfo.givenName}_${new Date().toLocaleDateString()}.csv`}
-                  >
-                    <IconButton icon={<ProjectOutlined />} toolTip={`Export ${machineModelInfo.givenName} Vitals`} />
-                  </CSVLink>
-                )}
-
-                {logs && (
-                  <CSVLink
-                    data={logs}
-                    filename={`logs_${machineModelInfo.givenName}_${new Date().toLocaleDateString()}.csv`}
-                  >
-                    <IconButton icon={<ExceptionOutlined />} toolTip={`Export ${machineModelInfo.givenName} Logs`} />
-                  </CSVLink>
-                )}
-              </Space>
-            }
+            extra={<ExportMachineInfoComponent machineModelInfo={machineModelInfo} vitals={vitals} logs={logs} />}
           >
             <DescriptionComponent value={machineModelInfo} />
           </Collapse.Panel>

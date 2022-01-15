@@ -1,5 +1,5 @@
 import { convertIsoStringToDate, MachineModelInformation } from '../models'
-import { getMachineExportInfo } from '../utils'
+import { getFileName, getMachineExportInfo } from '../utils'
 import { machineModelInfoTestData } from './setup/setup'
 
 describe('Utils', () => {
@@ -67,5 +67,58 @@ describe('Utils', () => {
     expect(exportInfoResult).toBeDefined()
     expect(exportInfoResult.length).toEqual(1)
     expect(exportInfoResult[0]).toEqual(expectedExportInfos[0])
+  })
+
+  test(`Get FileName with txt extension & info prefix`, () => {
+    const fileName = 'Machine A1'
+    const date = new Date().toLocaleDateString()
+    const prefix = 'info'
+
+    const resultFileName = getFileName(fileName, 'txt', prefix)
+
+    expect(resultFileName).toBeDefined()
+    expect(resultFileName).toEqual(`${prefix}_${fileName}_${date}.txt`)
+  })
+
+  test(`Get FileName with txt extension & no prefix`, () => {
+    const fileName = 'Machine A1'
+    const date = new Date().toLocaleDateString()
+
+    const resultFileName = getFileName(fileName, 'txt')
+
+    expect(resultFileName).toBeDefined()
+    expect(resultFileName).toEqual(`${fileName}_${date}.txt`)
+  })
+
+  test(`Get FileName with csv extension & vitals prefix`, () => {
+    const fileName = 'Machine A1'
+    const date = new Date().toLocaleDateString()
+    const prefix = 'vitals'
+
+    const resultFileName = getFileName(fileName, 'csv', prefix)
+
+    expect(resultFileName).toBeDefined()
+    expect(resultFileName).toEqual(`${prefix}_${fileName}_${date}.csv`)
+  })
+
+  test(`Get FileName with csv extension & logs prefix`, () => {
+    const fileName = 'Machine A1'
+    const date = new Date().toLocaleDateString()
+    const prefix = 'logs'
+
+    const resultFileName = getFileName(fileName, 'csv', prefix)
+
+    expect(resultFileName).toBeDefined()
+    expect(resultFileName).toEqual(`${prefix}_${fileName}_${date}.csv`)
+  })
+
+  test(`Get FileName with csv extension & no prefix`, () => {
+    const fileName = 'Machine A1'
+    const date = new Date().toLocaleDateString()
+
+    const resultFileName = getFileName(fileName, 'csv')
+
+    expect(resultFileName).toBeDefined()
+    expect(resultFileName).toEqual(`${fileName}_${date}.csv`)
   })
 })
