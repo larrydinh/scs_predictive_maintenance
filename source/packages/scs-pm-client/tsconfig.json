@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "jsx": "react-jsx",
+    "jsx": "react",
     "lib": ["es6", "dom"],
     "module": "esnext",
     "moduleResolution": "node",
@@ -29,15 +29,7 @@
     "noEmit": true,
     "noFallthroughCasesInSwitch": true
   },
-  "exclude": [
-    "node_modules",
-    "build",
-    "scripts",
-    "acceptance-tests",
-    "webpack",
-    "jest",
-    "src/setupTests.ts"
-  ],
+  "exclude": ["node_modules", "build", "scripts", "acceptance-tests", "webpack", "jest", "src/setupTests.ts"],
   "include": ["src", "typings/*.d.ts"],
   "references": [{ "path": "../scs-pm-core" }]
 }

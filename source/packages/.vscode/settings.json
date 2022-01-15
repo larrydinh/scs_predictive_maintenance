@@ -1,0 +1,15 @@
+{
+  "jest.jestCommandLine": "/Users/asharma/Amit_Docs/University/2021_WinterSemester/SCS/PredictiveMaintainance_Project/scs_predictive_maintenance/source/packages/scs-pm-server/node_modules/.bin/jest --config /Users/asharma/Amit_Docs/University/2021_WinterSemester/SCS/PredictiveMaintainance_Project/scs_predictive_maintenance/source/packages/jest.config.js",
+  "jest.showCoverageOnLoad": true,
+  "jestRunIt.jestPath": "/Users/asharma/Amit_Docs/University/2021_WinterSemester/SCS/PredictiveMaintainance_Project/scs_predictive_maintenance/source/packages/scs-pm-server/node_modules/.bin/jest",
+  "jestRunIt.jestConfigPath": "/Users/asharma/Amit_Docs/University/2021_WinterSemester/SCS/PredictiveMaintainance_Project/scs_predictive_maintenance/source/packages/jest.config.js",
+  "jest.debugMode": true,
+  "cSpell.words": [
+    "antd",
+    "browserslist",
+    "inmemory",
+    "linebreak",
+    "SCSPM",
+    "scspmeditor"
+  ]
+}

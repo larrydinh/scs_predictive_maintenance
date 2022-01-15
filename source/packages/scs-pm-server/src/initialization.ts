@@ -8,6 +8,16 @@ export function initialize() {
   createFile(
     config.getMachinesDirectory(),
     config.app.machinesFileName,
-    JSON.stringify(readFile(config.rawData.path, config.rawData.machineDummyData), null, 2),
+    JSON.stringify(readFile(config.rawData.path, config.rawData.machineDummyData, 'JSON'), null, 2),
+  )
+  createFile(
+    config.getMachinesDirectory(),
+    config.app.machineVitals,
+    readFile(config.rawData.path, config.rawData.machineDummyVitals, 'CSV'),
+  )
+  createFile(
+    config.getMachinesDirectory(),
+    config.app.machineLogs,
+    readFile(config.rawData.path, config.rawData.machineDummyLogs, 'CSV'),
   )
 }

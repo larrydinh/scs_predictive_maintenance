@@ -1,0 +1,24 @@
+.main-header {
+  display: flex;
+  background-color: #324157;
+}
+.main-header .app-name {
+  color: white;
+  margin: 0 2em 0 1em;
+  font: 20px sans-serif;
+  line-height: 50px;
+  width: 100%;
+}
+.main-header .sub-header {
+  color: white;
+  margin: 0 2em 0 1em;
+  font: 16px sans-serif;
+  line-height: 40px;
+  width: 100%;
+}
+.main-menu {
+  flex: 1;
+}
+.cascader {
+  margin-top: 10px;
+}

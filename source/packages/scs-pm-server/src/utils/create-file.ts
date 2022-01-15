@@ -3,7 +3,7 @@ import * as path from 'path'
 import { log } from '../logger'
 import { validateFileExistence } from './validate-file'
 
-export function createFile(destinationFolder: string, fileName: string, data: string): void {
+export function createFile(destinationFolder: string, fileName: string, data: any): void {
   const filePath = path.join(destinationFolder, fileName)
   if (!validateFileExistence(filePath)) {
     log.info(`Filename ${fileName} will be created at location: ${filePath}`)

@@ -1,19 +1,24 @@
-/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
-  coverageDirectory: 'coverage',
-  collectCoverageFrom: ['src/**/*.{ts, js}'],
-  coverageThreshold: {
-    global: {
-      branches: 0,
-      functions: 0,
-      lines: 0,
-      statements: 0,
-    },
+  roots: ['<rootDir>/src'],
+  testMatch: ['**/__tests__/**/*.test.ts?(x)', '**/?(*.)+(spec|test).js?(x)'],
+  transform: {
+    '^.+\\.(ts|tsx)$': 'ts-jest',
   },
-  moduleNameMapper: {
-    'src/(.*)': '<rootDir>/src/$1',
+  displayName: {
+    name: 'SCSPMServerTests',
+    color: 'magenta',
   },
-  moduleDirectories: ['node_modules', 'src'],
+  collectCoverage: true,
+  reporters: [
+    'default',
+    [
+      'jest-junit',
+      {
+        suiteName: 'SCSPMServerTests',
+        outputDirectory: '../test-results',
+        outputName: 'scs-pm-server-test-report.xml',
+      },
+    ],
+  ],
+  testPathIgnorePatterns: ['<rootDir>/build/', '<rootDir>/node_modules/'],
 }
