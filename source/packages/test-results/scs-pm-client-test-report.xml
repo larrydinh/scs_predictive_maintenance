@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="SCSPMClientTests" tests="2" failures="0" errors="0" time="2.052">
-  <testsuite name="Utils" errors="0" failures="0" skipped="0" timestamp="2022-01-12T16:42:43" time="0.996" tests="2">
-    <testcase classname="Utils Get Machine Export Info For 2 Machines" name="Utils Get Machine Export Info For 2 Machines" time="0.002">
+<testsuites name="SCSPMClientTests" tests="7" failures="0" errors="0" time="7.843">
+  <testsuite name="Utils" errors="0" failures="0" skipped="0" timestamp="2022-01-15T23:09:01" time="7.093" tests="7">
+    <testcase classname="Utils Get Machine Export Info For 2 Machines" name="Utils Get Machine Export Info For 2 Machines" time="0.003">
     </testcase>
-    <testcase classname="Utils Get Machine Export Info For 1 Machine" name="Utils Get Machine Export Info For 1 Machine" time="0.001">
+    <testcase classname="Utils Get Machine Export Info For 1 Machine" name="Utils Get Machine Export Info For 1 Machine" time="0">
+    </testcase>
+    <testcase classname="Utils Get FileName with txt extension &amp; info prefix" name="Utils Get FileName with txt extension &amp; info prefix" time="0.013">
+    </testcase>
+    <testcase classname="Utils Get FileName with txt extension &amp; no prefix" name="Utils Get FileName with txt extension &amp; no prefix" time="0.001">
+    </testcase>
+    <testcase classname="Utils Get FileName with csv extension &amp; vitals prefix" name="Utils Get FileName with csv extension &amp; vitals prefix" time="0">
+    </testcase>
+    <testcase classname="Utils Get FileName with csv extension &amp; logs prefix" name="Utils Get FileName with csv extension &amp; logs prefix" time="0">
+    </testcase>
+    <testcase classname="Utils Get FileName with csv extension &amp; no prefix" name="Utils Get FileName with csv extension &amp; no prefix" time="0.001">
     </testcase>
   </testsuite>
 </testsuites>

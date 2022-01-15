@@ -1,7 +1,7 @@
 import { Alert, Col, Collapse, Row } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { client } from '../../apollo-client'
-import { ExportFile, LinePlotWithSlider, MultiLinePlot } from '../../components'
+import { LinePlotWithSlider, MultiLinePlot } from '../../components'
 import {
   MachineLog,
   MachineLogsResponse,
@@ -10,10 +10,9 @@ import {
   MachineVitalsResponse,
 } from '../../models'
 import { getMachineLogsByMachineId, getMachineVitalsByMachineId } from '../../queries'
-import { getMachineExportInfo } from '../../utils'
 import { DescriptionComponent } from './description-component'
+import { ExportMachineInfoComponent } from './export-machine-info-component'
 import { LogsViewer } from './logs-viewer'
-
 interface Props {
   machineModelInfo: MachineModelInformation
 }
@@ -49,17 +48,12 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
     <>
       <div style={{ flex: 2, marginLeft: 10, marginRight: 10, flexGrow: 4 }}>
         <Collapse style={collapseStyle}>
-          <Collapse.Panel header={`Machine Synopsis (${machineModelInfo.givenName})`} key="1">
-            <DescriptionComponent
-              value={machineModelInfo}
-              extra={
-                <ExportFile
-                  infoToExport={getMachineExportInfo([machineModelInfo]).join(`\n\n\n`)}
-                  fileName={`${machineModelInfo.givenName}.txt`}
-                  toolTip="Export Machine Information"
-                />
-              }
-            />
+          <Collapse.Panel
+            header={`Machine Synopsis (${machineModelInfo.givenName})`}
+            key="1"
+            extra={<ExportMachineInfoComponent machineModelInfo={machineModelInfo} vitals={vitals} logs={logs} />}
+          >
+            <DescriptionComponent value={machineModelInfo} />
           </Collapse.Panel>
         </Collapse>
       </div>
