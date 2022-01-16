@@ -1,6 +1,7 @@
 import { Card, Col, Form, Row } from 'antd'
 import { FastField } from 'formik'
 import * as React from 'react'
+import * as Yup from 'yup'
 import {
   CalendarPickerField,
   DateTimePickerField,
@@ -15,6 +16,20 @@ interface Props {
   machineModelInfo: MachineModelInformation
   onOk: (updatedMachine: MachineModelInformation) => void
 }
+
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required('Name is required'),
+  givenName: Yup.string().required('Internal Name is required'),
+  machineId: Yup.string().required('Machine Id is required'),
+  model: Yup.string().required('Model is required'),
+  manufactureYear: Yup.string().required('Manufacturer Year is required'),
+  manufacturerName: Yup.string().required('Manufacturer Name is required'),
+  purchaseDate: Yup.string().required('Purchase Date is required'),
+  inductionDate: Yup.string().required('Induction Date is required'),
+  departmentName: Yup.string().required('Department Name is required'),
+  description: Yup.string().required('Description is required'),
+  operatingManualLink: Yup.string().required('Operating Manual Link is required'),
+})
 
 export class MachineInfoDialog extends React.Component<Props, never> {
   private modalFormikProvider = React.createRef<ModalFormikProvider>()
@@ -33,6 +48,7 @@ export class MachineInfoDialog extends React.Component<Props, never> {
         ref={this.modalFormikProvider}
         key={Math.random() * 1000}
         initialValues={machineModelInfo}
+        validationSchema={validationSchema}
         titleHeader={`Add a new machine`}
         onOk={onOk}
       >
@@ -50,7 +66,7 @@ export class MachineInfoDialog extends React.Component<Props, never> {
                   component={TextField}
                 />
                 <FastField
-                  name={`giveName`}
+                  name={`givenName`}
                   type="text"
                   meta={{
                     label: 'Internal Name',
