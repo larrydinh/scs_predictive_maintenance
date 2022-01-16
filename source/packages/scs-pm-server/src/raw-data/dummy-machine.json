@@ -8,13 +8,6 @@
       "model": "Machine Model A1",
       "manufactureYear": "2000",
       "manufacturerName": "Machine A1 Gmbh",
-      "manufacturerContactPerson": {
-        "identifier": "114d1854-f7c1-4d04-8850-4446e0efc93d",
-        "firstName": "Thomas",
-        "lastName": "Thomas",
-        "contactNumber": 100,
-        "email": "thomas@email.com"
-      },
       "purchaseDate": "2021-11-22T12:27:42.303Z",
       "inductionDate": "2021-12-22T12:27:42.303Z",
       "departmentName": "Department A1",
@@ -29,13 +22,6 @@
       "model": "Machine Model B1",
       "manufactureYear": "2001",
       "manufacturerName": "Machine B1 Gmbh",
-      "manufacturerContactPerson": {
-        "identifier": "114d1854-f7c1-4d04-8850-4446e0efc93c",
-        "firstName": "Daniel",
-        "lastName": "Daniel",
-        "contactNumber": 100,
-        "email": "daniel@myEmail.com"
-      },
       "purchaseDate": "2021-09-22T12:27:42.303Z",
       "inductionDate": "2021-10-22T12:27:42.303Z",
       "departmentName": "Department B1",

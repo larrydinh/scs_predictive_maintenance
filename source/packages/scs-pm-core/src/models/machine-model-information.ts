@@ -14,7 +14,6 @@ export interface MachineModelInformation extends Resource {
   model: string
   manufactureYear: string
   manufacturerName: string
-  manufacturerContactPerson: Person
   purchaseDate: string
   inductionDate: string
   departmentName: string
