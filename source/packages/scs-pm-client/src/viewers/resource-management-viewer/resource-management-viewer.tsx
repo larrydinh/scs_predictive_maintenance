@@ -1,7 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons'
 import { Card, Space, Typography } from 'antd'
 import Table, { ColumnProps } from 'antd/lib/table'
-import React from 'react'
+import React, { useState } from 'react'
 import { ExportFile, Hyperlink, IconButton } from '../../components'
 import { AppEntity, capitalizeFirstCharacter, convertIsoStringToDate, MachineModelInformation } from '../../models'
 import { getMachineExportInfo } from '../../utils'
@@ -13,6 +13,7 @@ interface Props {
 }
 
 export const ResourceManagementViewer: React.FC<Props> = ({ appEntityName, dataSource }: Props) => {
+  const [machines, setMachines] = useState<MachineModelInformation[]>(dataSource)
   const machineInfoDlg = React.createRef<MachineInfoDialog>()
 
   const onHandleOpenMachineInfoDialog = () => {
@@ -81,7 +82,7 @@ export const ResourceManagementViewer: React.FC<Props> = ({ appEntityName, dataS
             onClick={onHandleOpenMachineInfoDialog}
           />
           <ExportFile
-            infoToExport={getMachineExportInfo(dataSource).join(`\n\n\n`)}
+            infoToExport={getMachineExportInfo(machines).join(`\n\n\n`)}
             fileName="Machines.txt"
             toolTip="Export Machine Information"
           />
@@ -90,22 +91,24 @@ export const ResourceManagementViewer: React.FC<Props> = ({ appEntityName, dataS
       style={{ margin: 9.5, overflowX: 'auto' }}
     >
       <Table
-        key={dataSource.length}
+        key={machines.length}
         size={'small'}
-        dataSource={dataSource}
+        dataSource={machines}
         columns={getColumns()}
         pagination={{
           defaultPageSize: 10,
           showSizeChanger: true,
           pageSizeOptions: ['10', '20', '30'],
         }}
-        footer={() => `Total Items (${appEntityName}): ${dataSource.length}`}
+        footer={() => `Total Items (${appEntityName}): ${machines.length}`}
       />
       <MachineInfoDialog
         ref={machineInfoDlg}
         machineModelInfo={{} as MachineModelInformation}
         onOk={data => {
-          console.log(`helloWorld ${JSON.stringify(data, null, 2)}`)
+          const updatedMachineSet = machines.map(x => x)
+          updatedMachineSet.push(data)
+          setMachines(updatedMachineSet)
         }}
       />
     </Card>
