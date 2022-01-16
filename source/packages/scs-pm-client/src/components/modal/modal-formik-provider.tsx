@@ -1,7 +1,6 @@
 import { Button, Modal } from 'antd'
 import { Formik, FormikErrors, FormikHelpers, FormikProps, FormikValues } from 'formik'
 import * as React from 'react'
-import { DrawerProvider } from '../drawer/drawer-provider'
 import { SubHeader } from '../layout/sub-header'
 
 interface Props {
@@ -23,8 +22,6 @@ interface State {
 }
 
 export class ModalFormikProvider extends React.Component<Props, State> {
-  private configDocument = React.createRef<DrawerProvider>()
-
   constructor(props: Props) {
     super(props)
 
