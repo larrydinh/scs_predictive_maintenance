@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export function convertIsoStringToDate(isoString: string) {
-  return isoString.substr(0, 10)
+  return moment(isoString).format('YYYY-MM-DD HH:mm:ss')
 }
