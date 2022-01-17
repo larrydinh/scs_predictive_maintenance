@@ -1,49 +1,39 @@
 import * as path from 'path'
-import {
-  MachineLog,
-  MachineModelInfoResponse,
-  MachineModelInformation,
-  MachineTelemetry,
-} from 'scs-pm-core'
+import { MachineLog, MachineModelInformation, MachineTelemetry } from 'scs-pm-core'
 import { config } from '../config'
 import { log } from '../logger'
 import { getCSVData, getDirectoryPath, readFile, writeFile } from '../utils'
 
-export function getAllMachinesModelInformation(): MachineModelInfoResponse {
+export function getAllMachinesModelInformation() {
   const machinesModelInfoPath = path.join(
     getDirectoryPath(
       path.join(config.app.homeDir, config.app.appDirectory),
       config.app.machinesDirectory,
     ),
   )
-  const machinesModelInfo = readFile(
-    machinesModelInfoPath,
-    config.app.machinesFileName,
-    'JSON',
-  ) as MachineModelInfoResponse
+  const machinesModelInfo = readFile(machinesModelInfoPath, config.app.machinesFileName, 'JSON')
   return machinesModelInfo
 }
 
 export function addNewMachineToExistingMachines(
   newMachine: MachineModelInformation,
 ): MachineModelInformation[] {
-  const existingMachines = getAllMachinesModelInformation().machines
-
-  if (!existingMachines.includes(newMachine)) {
-    existingMachines.push(newMachine)
+  const { machines } = getAllMachinesModelInformation()
+  if (!machines.includes(newMachine)) {
+    machines.push(newMachine)
     writeFile(
       config.getMachinesDirectory(),
       config.app.machinesFileName,
-      JSON.stringify(existingMachines),
+      JSON.stringify({ machines }),
     )
     log.info(
-      `New machine with identifier ${newMachine.identifier} is added to the system and total machines in system are(#): ${existingMachines.length}`,
+      `New machine with identifier ${newMachine.identifier} is added to the system and total machines in system are(#): ${machines.length}`,
     )
   } else {
     log.warn(`New machine with identifier ${newMachine.identifier} is already present`)
   }
 
-  return existingMachines
+  return machines
 }
 
 export function getMachineVitals(

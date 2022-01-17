@@ -32,7 +32,7 @@ export const DateTimePickerField: React.SFC<DateTimePickerProps> = ({
         }}
         showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
         onChange={value => {
-          setFieldValue(field.name, value)
+          setFieldValue(field.name, value?.format())
         }}
       />
     </FormItem>

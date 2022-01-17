@@ -24,3 +24,8 @@ export interface MachineModelInformation extends Resource {
 export interface MachineModelInfoResponse {
   machines: MachineModelInformation[]
 }
+
+export interface AddMachineResponse {
+  response: string
+  machine: MachineModelInformation
+}

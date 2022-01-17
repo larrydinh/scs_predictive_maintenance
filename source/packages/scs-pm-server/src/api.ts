@@ -24,7 +24,7 @@ function systemInformation(_req: Request, res: Response) {
 function machinesModelInformation(_req: Request, res: Response) {
   try {
     const machinesModelInfo = getAllMachinesModelInformation()
-    res.status(200).json({ machines: machinesModelInfo.machines })
+    res.status(200).json(machinesModelInfo)
   } catch (err) {
     const errorMessage = `Unable to fetch the machines model information due to: ${
       (err as Error).message
@@ -39,11 +39,11 @@ function addNewMachine(req: Request, res: Response) {
     const newMachine: MachineModelInformation = req.body.machine
     const updatedMachines = addNewMachineToExistingMachines(newMachine)
 
-    res.status(200).json({ machines: updatedMachines })
+    res.status(200).json({ machine: newMachine, allMachines: updatedMachines, response: 'OK' })
   } catch (err) {
-    const errorMessage = `Unable to add new machine to the system due t: ${getErrorMessage(err)}`
+    const errorMessage = `Unable to add new machine to the system due to: ${getErrorMessage(err)}`
     log.error(errorMessage)
-    res.status(500).json({ error: errorMessage })
+    res.status(500).json({ error: errorMessage, response: 'Error' })
   }
 }
 
