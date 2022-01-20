@@ -38,3 +38,26 @@
   3.7 Additional comments
 
 ### Supporting Information
+
+
+
+
+### Functional Requirement:
+
+1. System must be able to display the vitals of the machine for analytics   purposes. The vitals like speed, pressure, and temperature must be visualized as graphs for a selected machine
+2. The prediction results and messages must be displayed for a selected machine along with the vitals
+3. The system must be supported with information export functionalities to either CSV and text files.
+4. The Vitals of a selected machine must be exported as CSV file with file name having as a combination of vitals, machine name and date of export (e.g: vitals_machineA_DDMMYYYY.csv). The exported file must at least contain the following information
+      - Timestamp
+      - Machine Id
+      - Pressure
+      - Speed
+      - Temperature
+5. The analytics result for a selected machine must be exported as the CSV file with file name as the combination of logs, machine name and date of export (e.g: logs_machineA_DDMMYYYY.csv). The exported file must at least contain the following information
+      - Timestamp
+      - Machine Id
+      - Criticality Level
+      - Message
+6. The User interface must be divided into 2 pages
+      - Dashboard - to display the vitals and prediction results
+      - Resource Management - to manage various entities with the system. For the first version only machines will be displayed in the resource management page
