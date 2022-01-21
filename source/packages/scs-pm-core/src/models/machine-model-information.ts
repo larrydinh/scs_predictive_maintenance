@@ -10,6 +10,7 @@ export interface Person extends Resource {
 export interface MachineModelInformation extends Resource {
   name: string
   givenName: string
+  isActive: boolean
   machineId: string
   model: string
   manufactureYear: string

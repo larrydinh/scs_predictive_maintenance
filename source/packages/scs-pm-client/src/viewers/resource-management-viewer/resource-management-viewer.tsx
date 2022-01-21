@@ -1,4 +1,4 @@
-import { PlusOutlined } from '@ant-design/icons'
+import { CheckCircleOutlined, CloseCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { Card, Space, Typography } from 'antd'
 import Table, { ColumnProps } from 'antd/lib/table'
 import React, { useState } from 'react'
@@ -39,6 +39,7 @@ export const ResourceManagementViewer: React.FC<Props> = ({ appEntityName, dataS
         const columnKeys = [
           'name',
           'givenName',
+          'isActive',
           'machineId',
           'model',
           'manufactureYear',
@@ -62,6 +63,12 @@ export const ResourceManagementViewer: React.FC<Props> = ({ appEntityName, dataS
                 return <Hyperlink title="Manual" url={text} />
               } else if (key === 'purchaseDate' || key === 'inductionDate') {
                 return convertIsoStringToDate(text)
+              } else if (key === 'isActive') {
+                return text && text === true ? (
+                  <CheckCircleOutlined style={{ color: 'green', fontSize: 24 }} title="Active" />
+                ) : (
+                  <CloseCircleOutlined style={{ color: 'red', fontSize: 24 }} title="In-Active" />
+                )
               } else {
                 return text
               }
@@ -137,7 +144,11 @@ export const ResourceManagementViewer: React.FC<Props> = ({ appEntityName, dataS
         }}
         footer={() => `Total Items (${appEntityName}): ${machines.length}`}
       />
-      <MachineInfoDialog ref={machineInfoDlg} machineModelInfo={{} as MachineModelInformation} onOk={onHandleAdd} />
+      <MachineInfoDialog
+        ref={machineInfoDlg}
+        machineModelInfo={{ isActive: true } as MachineModelInformation}
+        onOk={onHandleAdd}
+      />
     </Card>
   )
 }
