@@ -11,7 +11,9 @@ export const DashBoardPage: React.FC = () => {
   return (
     <QueryProvider query={getAllMachineModelInformationQuery}>
       {({ data }) => {
-        const machineModelInfo: MachineModelInformation[] = (data.queryResult as MachineModelInfoResponse).machines
+        const machineModelInfo: MachineModelInformation[] = (
+          data.queryResult as MachineModelInfoResponse
+        ).machines.filter(mac => mac.isActive)
         return (
           <Layout name="Dashboard" appNavigation={<AppNavigation />}>
             <div className="control-panel-container">
