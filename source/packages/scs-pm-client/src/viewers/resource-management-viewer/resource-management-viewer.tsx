@@ -1,9 +1,9 @@
-import { CheckCircleOutlined, CloseCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import { CheckCircleOutlined, CloseCircleOutlined, ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { Card, Space, Typography } from 'antd'
 import Table, { ColumnProps } from 'antd/lib/table'
 import React, { useState } from 'react'
 import { client } from '../../apollo-client'
-import { ExportFile, Hyperlink, IconButton, notifyUser } from '../../components'
+import { ExportFile, Hyperlink, IconButton, notifyUser, Selector } from '../../components'
 import {
   AddMachineResponse,
   AppEntity,
@@ -11,7 +11,9 @@ import {
   convertIsoStringToDate,
   generateUniqueSchemeIdentifier,
   getErrorMessage,
+  getLabelValueFromEnum,
   MachineModelInformation,
+  ResourceManagerFilterOptions,
   SchemeNames,
 } from '../../models'
 import { constructAddMachineQuery } from '../../queries'
@@ -25,6 +27,7 @@ interface Props {
 
 export const ResourceManagementViewer: React.FC<Props> = ({ appEntityName, dataSource }: Props) => {
   const [machines, setMachines] = useState<MachineModelInformation[]>(dataSource)
+  const [filterOption, setFilterOption] = useState<string>(ResourceManagerFilterOptions.ALL)
   const machineInfoDlg = React.createRef<MachineInfoDialog>()
 
   const onHandleOpenMachineInfoDialog = () => {
@@ -66,8 +69,10 @@ export const ResourceManagementViewer: React.FC<Props> = ({ appEntityName, dataS
               } else if (key === 'isActive') {
                 return text && text === true ? (
                   <CheckCircleOutlined style={{ color: 'green', fontSize: 24 }} title="Active" />
-                ) : (
+                ) : text === false ? (
                   <CloseCircleOutlined style={{ color: 'red', fontSize: 24 }} title="In-Active" />
+                ) : (
+                  <ExclamationCircleOutlined style={{ color: 'orange', fontSize: 24 }} title="Unknown" />
                 )
               } else {
                 return text
@@ -103,6 +108,18 @@ export const ResourceManagementViewer: React.FC<Props> = ({ appEntityName, dataS
     }
   }
 
+  const getDataSource = () => {
+    switch (filterOption) {
+      case ResourceManagerFilterOptions.ACTIVE:
+        return machines.filter(mac => mac.isActive === true)
+      case ResourceManagerFilterOptions.INACTIVE:
+        return machines.filter(mac => mac.isActive === false)
+      case ResourceManagerFilterOptions.ALL:
+      default:
+        return machines
+    }
+  }
+
   return (
     <Card
       title={
@@ -117,6 +134,15 @@ export const ResourceManagementViewer: React.FC<Props> = ({ appEntityName, dataS
       bordered={true}
       extra={
         <Space size="small">
+          <Selector
+            style={{ marginRight: 4, marginTop: 6, width: 120 }}
+            domainValues={getLabelValueFromEnum(ResourceManagerFilterOptions)}
+            selectedValue={filterOption || 'Select An Option'}
+            placeholder="Select An Option"
+            onValueChanged={selectedEntity => {
+              setFilterOption(selectedEntity)
+            }}
+          />
           <IconButton
             style={{ marginTop: 5 }}
             icon={<PlusOutlined />}
@@ -133,16 +159,16 @@ export const ResourceManagementViewer: React.FC<Props> = ({ appEntityName, dataS
       style={{ margin: 9.5, overflowX: 'auto' }}
     >
       <Table
-        key={machines.length}
+        key={getDataSource().length}
         size={'small'}
-        dataSource={machines}
+        dataSource={getDataSource()}
         columns={getColumns()}
         pagination={{
           defaultPageSize: 10,
           showSizeChanger: true,
           pageSizeOptions: ['10', '20', '30'],
         }}
-        footer={() => `Total Items (${appEntityName}): ${machines.length}`}
+        footer={() => `Total Items (${appEntityName}): ${getDataSource().length}`}
       />
       <MachineInfoDialog
         ref={machineInfoDlg}
