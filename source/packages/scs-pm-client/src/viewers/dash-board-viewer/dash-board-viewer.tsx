@@ -65,12 +65,14 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
                 <LinePlotWithSlider
                   data={vitals.map(z => {
                     return {
-                      Date: z.timestamp,
+                      timestamp: z.timestamp,
                       temperature: z.temperature,
                     }
                   })}
-                  xField="Date"
+                  xField="timestamp"
                   yField="temperature"
+                  xAxisTitle="Timestamp"
+                  yAxisTitle="Temperature (°C)"
                   tickCount={5}
                 />
               ) : (
@@ -86,12 +88,14 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
                 <LinePlotWithSlider
                   data={vitals.map(z => {
                     return {
-                      Date: z.timestamp,
+                      timestamp: z.timestamp,
                       pressure: z.pressure,
                     }
                   })}
-                  xField="Date"
+                  xField="timestamp"
                   yField="pressure"
+                  xAxisTitle="Timestamp"
+                  yAxisTitle="Pressure (kPa)"
                   tickCount={5}
                 />
               ) : (
@@ -109,12 +113,14 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
                 <LinePlotWithSlider
                   data={vitals.map(z => {
                     return {
-                      Date: z.timestamp,
+                      timestamp: z.timestamp,
                       speed: z.speed,
                     }
                   })}
-                  xField="Date"
+                  xField="timestamp"
                   yField="speed"
+                  xAxisTitle="Timestamp"
+                  yAxisTitle="Speed (rpm)"
                   tickCount={5}
                 />
               ) : (
@@ -131,14 +137,32 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
                 <MultiLinePlot
                   data={vitals.map(z => {
                     return {
-                      Date: z.timestamp,
+                      timestamp: z.timestamp,
                       pressure: z.pressure,
                       ambientPressure: z.ambient_pressure,
                     }
                   })}
-                  xField="Date"
+                  xField="timestamp"
                   yField={['pressure', 'ambientPressure']}
-                  tickCount={5}
+                  xAxis={{
+                    title: {
+                      text: 'Timestamp',
+                    },
+                  }}
+                  yAxis={{
+                    pressure: {
+                      tickCount: 5,
+                      title: {
+                        text: 'Pressure (kPa)',
+                      },
+                    },
+                    ambientPressure: {
+                      tickCount: 5,
+                      title: {
+                        text: 'Ambient Pressure (kPa)',
+                      },
+                    },
+                  }}
                 />
               ) : (
                 <Alert message="Data is un-available" />

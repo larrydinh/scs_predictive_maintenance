@@ -1,34 +1,35 @@
-import { DualAxes } from '@ant-design/plots'
+import { DualAxes, DualAxesConfig, Options } from '@ant-design/plots'
+import { Axis } from '@ant-design/plots/node_modules/@antv/g2plot'
 import React from 'react'
 
 interface Props {
   data: any[]
   xField: string
   yField: string[]
-
-  tickCount: number
+  xAxis: Axis
+  yAxis: Options['yAxis'][] | Record<string, Options['yAxis']>
 }
 
-export const MultiLinePlot: React.FC<Props> = ({ data, xField, yField, tickCount }: Props) => {
-  const config = {
+export const MultiLinePlot: React.FC<Props> = ({ data, xField, yField, xAxis, yAxis }: Props) => {
+  const config: DualAxesConfig = {
     data: [data, data],
     xField,
     yField,
-
-    xAxis: {
-      tickCount,
-    },
+    xAxis,
+    yAxis,
     geometryOptions: [
       {
         geometry: 'line',
         color: '#5B8FF9',
+        smooth: true,
       },
       {
         geometry: 'line',
         color: '#5AD8A6',
+        smooth: true,
       },
     ],
-    smooth: true,
+
     animation: {
       appear: {
         animation: 'path-in',
