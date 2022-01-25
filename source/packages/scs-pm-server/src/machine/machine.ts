@@ -1,5 +1,10 @@
 import * as path from 'path'
-import { MachineLog, MachineModelInformation, MachineTelemetry } from 'scs-pm-core'
+import {
+  MachineLog,
+  MachineModelInformation,
+  MachineModelTrainedInformation,
+  MachineTelemetry,
+} from 'scs-pm-core'
 import { config } from '../config'
 import { log } from '../logger'
 import { getCSVData, getDirectoryPath, readFile, writeFile } from '../utils'
@@ -57,6 +62,20 @@ export function getMachineLogs(machineId: string, callBack: (machineLogs: Machin
     (data: MachineLog[]) => {
       const machineLogs = data.filter(mac => mac.machineID === machineId)
       callBack(machineLogs)
+    },
+  )
+}
+
+export function getMachineModelTrainedInformation(
+  machineId: string,
+  callBack: (machineModelTrainedInformation: MachineModelTrainedInformation[]) => void,
+) {
+  getCSVData<MachineModelTrainedInformation>(
+    path.join(config.getMachinesDirectory(), config.app.machineModelTrainedInformation),
+    config.app.machineModelTrainedInfoHeaders,
+    (data: MachineModelTrainedInformation[]) => {
+      const machineModelTrainedInformation = data.filter(mac => mac.machineID === machineId)
+      callBack(machineModelTrainedInformation)
     },
   )
 }

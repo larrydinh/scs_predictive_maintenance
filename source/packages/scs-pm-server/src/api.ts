@@ -1,10 +1,17 @@
 import { Request, Response, Router } from 'express'
-import { getErrorMessage, MachineLog, MachineModelInformation, MachineTelemetry } from 'scs-pm-core'
+import {
+  getErrorMessage,
+  MachineLog,
+  MachineModelInformation,
+  MachineModelTrainedInformation,
+  MachineTelemetry,
+} from 'scs-pm-core'
 import { log } from './logger'
 import {
   addNewMachineToExistingMachines,
   getAllMachinesModelInformation,
   getMachineLogs,
+  getMachineModelTrainedInformation,
   getMachineVitals,
 } from './machine'
 import { getVersionInformation, verifySystem } from './system'
@@ -81,9 +88,30 @@ function machineLogsInformation(req: Request, res: Response) {
   }
 }
 
+function machineModelTrainedInformation(req: Request, res: Response) {
+  const { machineId } = req.query
+  try {
+    log.info(`Machine trained model information for machine id:${machineId} are requested`)
+    getMachineModelTrainedInformation(
+      machineId as string,
+      (data: MachineModelTrainedInformation[]) => {
+        log.info(`Total ${data.length} trained rows are found for machine id:${machineId}`)
+        res.status(200).json({ machineModelTrainedInformation: data })
+      },
+    )
+  } catch (err) {
+    const errorMessage = `Unable to get the machine model trained  data for the machine ${machineId} due to: ${getErrorMessage(
+      err,
+    )}`
+    log.error(errorMessage)
+    res.status(500).json({ error: errorMessage })
+  }
+}
+
 api.get('/verify', verifyServerSetup)
 api.get('/version', systemInformation)
 api.get('/machines', machinesModelInformation)
 api.get('/machineVitals', machineVitalsInformation)
 api.get('/machineLogs', machineLogsInformation)
+api.get('/machineModelTrainedInformation', machineModelTrainedInformation)
 api.post('/addMachine', addNewMachine)
