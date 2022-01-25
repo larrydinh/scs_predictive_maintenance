@@ -237,7 +237,11 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
         <Col span={24}>
           <Collapse defaultActiveKey="1" style={collapseStyle}>
             <Collapse.Panel header="Logs" key="1">
-              {logs && logs.length !== 0 ? <LogsViewer data={logs} /> : <Alert message="Logs are un-available" />}
+              {logs && logs.length !== 0 ? (
+                <LogsViewer data={logs} filterTableColumns={tableColumns} />
+              ) : (
+                <Alert message="Logs are un-available" />
+              )}
             </Collapse.Panel>
           </Collapse>
         </Col>
