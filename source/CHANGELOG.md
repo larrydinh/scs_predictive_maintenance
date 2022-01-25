@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file. Dates are d
 
 #### [Unreleased](https://github.com/amittkSharma/scs_predictive_maintenance/compare/v1.0.0...HEAD)
 
+- Feature/srs draft [`#51`](https://github.com/amittkSharma/scs_predictive_maintenance/pull/51)
+- feat: Add new machine UI interface [`#49`](https://github.com/amittkSharma/scs_predictive_maintenance/pull/49)
+- chore: Update change log [`ee2e010`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/ee2e0102be9b2b1ddada168d57cc05def8733476)
+- chore: Update the machine model information interface by removing the manufacturer contact person [`d91e5b4`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/d91e5b4ec12a4f7b985c5c9aec71316036e48b1c)
+- chore: Lint and prettify the whole code [`dea3547`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/dea35470700abed6e641bf1d29376d4f4f58e9b1)
+- feat: Showing the active and inactive machine status in the resource manager [`b800506`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/b80050655babe22692858114e9abe5adab6a7c2f)
+- feat: Adding filter options in the resource manager view [`c277241`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/c2772419508e9bb573a7a8d9b84f7c3b1d743ea3)
+- fix: Dashboard will only show active machines for analysis [`e836ef0`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/e836ef0ef884489c27f316f63de3980e08e2d53a)
+- feat: Show the levels of prediction as red light information to the user [`597182c`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/597182cb93b6baa0fd99fadd3685ea865661b950)
+- feat: Adding units to graph [`b7a9688`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/b7a9688e45011eab60411f7c217986439cb0676b)
+- chore: Complete the FMEA hazard analysis for network, deployment, secured communication, security of exported data [`4fad711`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/4fad711c9bba46912c09a6f43099b8da0d4835f3)
+- feat: Add a table view in the dashboard to reduce graph reading problems [`e39c689`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/e39c689157e9c3e93b98c34b4a8f2b600a1da6cd)
+- feat: In the logs viewer also removed the machine id as it is redundant [`7657ca9`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/7657ca90418e7e98d9406630f2a7f474fef658f1)
+
 ### [v1.0.0](https://github.com/amittkSharma/scs_predictive_maintenance/compare/v0.6.0...v1.0.0)
 
 > 16 January 2022
