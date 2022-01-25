@@ -21,7 +21,6 @@ export const ExportFile: React.FC<Props> = ({ infoToExport, fileName, toolTip }:
   return (
     <IconButton
       key="exportConfiguration"
-      style={{ marginTop: 5, marginRight: 5 }}
       toolTip={toolTip || 'Export'}
       onClick={e => {
         e.stopPropagation()

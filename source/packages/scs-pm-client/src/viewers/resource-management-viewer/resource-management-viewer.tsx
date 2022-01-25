@@ -135,7 +135,7 @@ export const ResourceManagementViewer: React.FC<Props> = ({ appEntityName, dataS
       extra={
         <Space size="small">
           <Selector
-            style={{ marginRight: 4, marginTop: 6, width: 120 }}
+            style={{ marginTop: 4, width: 120 }}
             domainValues={getLabelValueFromEnum(ResourceManagerFilterOptions)}
             selectedValue={filterOption || 'Select An Option'}
             placeholder="Select An Option"
@@ -143,12 +143,7 @@ export const ResourceManagementViewer: React.FC<Props> = ({ appEntityName, dataS
               setFilterOption(selectedEntity)
             }}
           />
-          <IconButton
-            style={{ marginTop: 5 }}
-            icon={<PlusOutlined />}
-            toolTip={`Add new machine`}
-            onClick={onHandleOpenMachineInfoDialog}
-          />
+          <IconButton icon={<PlusOutlined />} toolTip={`Add new machine`} onClick={onHandleOpenMachineInfoDialog} />
           <ExportFile
             infoToExport={getMachineExportInfo(machines).join(`\n\n\n`)}
             fileName="Machines.txt"
