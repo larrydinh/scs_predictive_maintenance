@@ -18,7 +18,6 @@ export const config = {
     machineLogs: 'logs.csv',
     machineModelTrainedInformation: 'trained-data.csv',
     telemetryHeaders: [
-      '',
       'timestamp',
       'speed_desired',
       'ambient_temperature',
@@ -28,7 +27,7 @@ export const config = {
       'pressure',
       'machineID',
     ],
-    logHeaders: ['', 'timestamp', 'machineID', 'level', 'code'],
+    logHeaders: ['timestamp', 'machineID', 'level', 'code'],
     machineModelTrainedInfoHeaders: [
       '',
       'machineID',
