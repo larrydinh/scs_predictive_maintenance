@@ -42,6 +42,7 @@
 
 
 
+
 #### Functional Requirement:
 
 1. System must be able to display the vitals of the machine for analytics   purposes. The vitals like speed, pressure, and temperature must be visualized as graphs for a selected machine
