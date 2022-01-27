@@ -11,12 +11,14 @@ import {
   MachineModelInformation,
   MachineModelTrainedInformation,
   MachineModelTrainedInformationResponse,
+  MachinePredictionResponse,
   MachineTelemetry,
   MachineVitalsResponse,
 } from '../../models'
 import {
   getMachineLogsByMachineId,
   getMachineModelTrainedInfoByMachineId,
+  getMachinePredictionByMachineId,
   getMachineVitalsByMachineId,
 } from '../../queries'
 import { DescriptionComponent } from './description-component'
@@ -70,6 +72,16 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
     queryCall()
   }, [machineModelInfo])
 
+  const getMachinePrediction = async (record: MachineModelTrainedInformation) => {
+    const { machineID } = record
+    const machinePredictionQueryResponse = await client.query({
+      query: getMachinePredictionByMachineId(machineID),
+    })
+
+    const s = machinePredictionQueryResponse.data.queryResult as MachinePredictionResponse
+    console.log(`Response: ${JSON.stringify(s, null, 2)}`)
+  }
+
   const getColumns = (
     ds: MachineTelemetry[] | MachineModelTrainedInformation[],
     isActionColumnRequired = false,
@@ -95,7 +107,7 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
           <IconButton
             toolTip="Execute Task"
             icon={<PlayCircleOutlined />}
-            onClick={() => console.log(`record: ${JSON.stringify(record)}`)}
+            onClick={() => getMachinePrediction(record)}
           />
         ),
       })

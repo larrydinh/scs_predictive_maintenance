@@ -1,4 +1,7 @@
 import { Request, Response, Router } from 'express'
+import * as fs from 'fs'
+import * as jpickle from 'jpickle'
+import * as path from 'path'
 import {
   getErrorMessage,
   MachineLog,
@@ -108,6 +111,29 @@ function machineModelTrainedInformation(req: Request, res: Response) {
   }
 }
 
+async function machinePrediction(req: Request, res: Response) {
+  const { machineId } = req.query
+  try {
+    log.info(`Prediction for Machine:${machineId} are requested`)
+
+    const modelPath = path.join(__dirname, './raw-data/pm_pro3.pkl')
+    console.log(`model path: ${JSON.stringify(modelPath, null, 2)}`)
+    const modelData = fs.readFileSync(modelPath, 'binary')
+
+    const f = await jpickle.loads(modelData)
+
+    console.log(`f: ${f}`)
+    console.log(`f: ${JSON.stringify(f, null, 2)}`)
+    res.status(200).json({ machinePrediction: `prediction for ${machineId} is done` })
+  } catch (err) {
+    const errorMessage = `Unable to get the machine model trained  data for the machine ${machineId} due to: ${getErrorMessage(
+      err,
+    )}`
+    log.error(errorMessage)
+    res.status(500).json({ error: errorMessage })
+  }
+}
+
 api.get('/verify', verifyServerSetup)
 api.get('/version', systemInformation)
 api.get('/machines', machinesModelInformation)
@@ -115,3 +141,4 @@ api.get('/machineVitals', machineVitalsInformation)
 api.get('/machineLogs', machineLogsInformation)
 api.get('/machineModelTrainedInformation', machineModelTrainedInformation)
 api.post('/addMachine', addNewMachine)
+api.get('/machinePrediction', machinePrediction)

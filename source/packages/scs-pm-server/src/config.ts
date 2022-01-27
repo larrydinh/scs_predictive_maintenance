@@ -17,6 +17,7 @@ export const config = {
     machineVitals: 'telemetry.csv',
     machineLogs: 'logs.csv',
     machineModelTrainedInformation: 'trained-data.csv',
+    machineModel: 'pm_pro3.pkl',
     telemetryHeaders: [
       'timestamp',
       'speed_desired',
@@ -51,6 +52,7 @@ export const config = {
     machineDummyLogs: 'logs.csv',
     machineDummyVitals: 'telemetry.csv',
     machineModelTrainedDummyInformation: 'trained-data.csv',
+    machineModelDummy: 'pm_pro3.pkl',
   },
   getAppsDirectory(): string {
     return path.join(config.app.homeDir, config.app.appDirectory)

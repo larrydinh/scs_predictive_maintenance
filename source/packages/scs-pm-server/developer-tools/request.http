@@ -15,6 +15,10 @@ http://localhost:8081/api/machineVitals?machineId=M_0054
 ### Get machine logs for a specific machine
 http://localhost:8081/api/machineLogs?machineId=M_0054
 
+
+### Get machine prediction for a machine
+http://localhost:8081/api/machinePrediction?machineId=M_0628
+
 ###
 POST http://localhost:8081/api/addMachine
 content-type: application/json
