@@ -41,6 +41,7 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
 
   const [isGraphView, setIsGraphView] = useState<boolean>(true)
   const [tableColumns] = useState<string[]>([
+    'index',
     'machineID',
     'speed_desired',
     'ambient_temperature',
