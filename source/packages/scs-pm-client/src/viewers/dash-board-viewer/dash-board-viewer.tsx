@@ -3,7 +3,7 @@ import { Alert, Col, Collapse, Row, Switch, Table } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 import React, { useEffect, useState } from 'react'
 import { client, pythonClient } from '../../apollo-client'
-import { IconButton, LinePlotWithSlider, MultiLinePlot, notifyUser } from '../../components'
+import { IconButton, LinePlotWithSlider, notifyUser } from '../../components'
 import {
   capitalizeFirstCharacter,
   MachineLog,
@@ -35,6 +35,8 @@ const collapseStyle: React.CSSProperties = {
 }
 
 export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) => {
+  const [vitalsDs, setVitalsDs] = useState<MachineTelemetry[]>()
+
   const [vitals, setVitals] = useState<MachineTelemetry[]>()
   const [logs, setLogs] = useState<MachineLog[]>()
   const [machineModelTrainedInfo, setMachineModelTrainedInfo] = useState<MachineModelTrainedInformation[]>()
@@ -57,18 +59,18 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
         query: getMachineVitalsByMachineId(machineId),
       })
       const machineVitalsResult = machineVitalsQueryResult.data.queryResult as MachineVitalsResponse
+      setVitalsDs(machineVitalsResult.machineVitals)
       setVitals(machineVitalsResult.machineVitals)
 
       const machineLogsQueryResult = await client.query({ query: getMachineLogsByMachineId(machineId) })
       const machineLogsResult = machineLogsQueryResult.data.queryResult as MachineLogsResponse
-      setLogs(
-        machineLogsResult.machineLogs.map(c => {
-          return {
-            ...c,
-            key: `${c.machineID}_${c.timestamp.toString()}`,
-          }
-        }),
-      )
+      const upLogs = machineLogsResult.machineLogs.map(c => {
+        return {
+          ...c,
+          key: `${c.machineID}_${c.timestamp.toString()}`,
+        }
+      })
+      setLogs(upLogs)
 
       const machineModelTrainedInfoQueryResult = await client.query({
         query: getMachineModelTrainedInfoByMachineId(machineId),
@@ -130,6 +132,18 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
     }
 
     return cols
+  }
+
+  const updateGraphs = (row: MachineModelTrainedInformation) => {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const { cycle_start, cycle_end } = row
+
+    const filteredVitals = vitalsDs?.filter(
+      x =>
+        new Date(x.timestamp).toISOString() >= new Date(cycle_start).toISOString() &&
+        new Date(x.timestamp).toISOString() <= new Date(cycle_end).toISOString(),
+    )
+    setVitals(filteredVitals)
   }
 
   return (
@@ -237,40 +251,11 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
 
             <Col span={12}>
               <Collapse defaultActiveKey="1" style={collapseStyle}>
-                <Collapse.Panel header="Pressure Vs Ambient Pressure" key="1">
-                  {vitals ? (
-                    <MultiLinePlot
-                      data={vitals.map(z => {
-                        return {
-                          timestamp: z.timestamp,
-                          pressure: z.pressure,
-                          ambientPressure: z.ambient_pressure,
-                        }
-                      })}
-                      xField="timestamp"
-                      yField={['pressure', 'ambientPressure']}
-                      xAxis={{
-                        title: {
-                          text: 'Timestamp',
-                        },
-                      }}
-                      yAxis={{
-                        pressure: {
-                          tickCount: 5,
-                          title: {
-                            text: 'Pressure (kPa)',
-                          },
-                        },
-                        ambientPressure: {
-                          tickCount: 5,
-                          title: {
-                            text: 'Ambient Pressure (kPa)',
-                          },
-                        },
-                      }}
-                    />
+                <Collapse.Panel header="Logs" key="1">
+                  {logs && logs.length !== 0 ? (
+                    <LogsViewer data={logs} filterTableColumns={tableColumns} />
                   ) : (
-                    <Alert message="Data is un-available" />
+                    <Alert message="Logs are un-available" type="info" />
                   )}
                 </Collapse.Panel>
               </Collapse>
@@ -307,20 +292,6 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
       <Row style={{ marginTop: 8, marginLeft: 10, marginRight: 10 }} gutter={4}>
         <Col span={24}>
           <Collapse defaultActiveKey="1" style={collapseStyle}>
-            <Collapse.Panel header="Logs" key="1">
-              {logs && logs.length !== 0 ? (
-                <LogsViewer data={logs} filterTableColumns={tableColumns} />
-              ) : (
-                <Alert message="Logs are un-available" />
-              )}
-            </Collapse.Panel>
-          </Collapse>
-        </Col>
-      </Row>
-
-      <Row style={{ marginTop: 8, marginLeft: 10, marginRight: 10 }} gutter={4}>
-        <Col span={24}>
-          <Collapse defaultActiveKey="1" style={collapseStyle}>
             <Collapse.Panel header="Machine Cycles" key="1">
               {machineModelTrainedInfo ? (
                 <Table
@@ -333,6 +304,13 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
                     defaultPageSize: 10,
                     showSizeChanger: true,
                     pageSizeOptions: ['10', '20', '30'],
+                  }}
+                  rowSelection={{
+                    type: 'radio',
+                    onChange: (_selectedRowKeys: React.Key[], selectedRows: any[]) => {
+                      updateGraphs(selectedRows[0])
+                    },
+                    hideSelectAll: true,
                   }}
                   footer={() => `Total(#): ${machineModelTrainedInfo.length}`}
                 />
