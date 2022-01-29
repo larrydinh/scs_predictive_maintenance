@@ -8,6 +8,7 @@ dotenv.config()
 global.Headers = Headers
 
 export const apiUrl = process.env.REACT_APP_SERVER_NAME || 'http://localhost:8081/api/'
+export const pythonUrl = process.env.REACT_APP_PYTHON_SERVER_NAME || 'http://127.0.0.1:5000/api/'
 export type ApolloClientType = 'graphqlClient' | 'restClient'
 
 function getApolloClient(link: RestLink | HttpLink) {
@@ -32,6 +33,13 @@ function getApolloClient(link: RestLink | HttpLink) {
 export const client = getApolloClient(
   new RestLink({
     uri: apiUrl,
+    customFetch: fetch,
+  }),
+)
+
+export const pythonClient = getApolloClient(
+  new RestLink({
+    uri: pythonUrl,
     customFetch: fetch,
   }),
 )

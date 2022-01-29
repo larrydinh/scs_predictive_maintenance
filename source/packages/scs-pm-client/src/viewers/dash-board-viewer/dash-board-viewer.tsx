@@ -2,8 +2,8 @@ import { PlayCircleOutlined } from '@ant-design/icons'
 import { Alert, Col, Collapse, Row, Switch, Table } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 import React, { useEffect, useState } from 'react'
-import { client } from '../../apollo-client'
-import { IconButton, LinePlotWithSlider, MultiLinePlot } from '../../components'
+import { client, pythonClient } from '../../apollo-client'
+import { IconButton, LinePlotWithSlider, MultiLinePlot, notifyUser } from '../../components'
 import {
   capitalizeFirstCharacter,
   MachineLog,
@@ -75,12 +75,13 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
 
   const getMachinePrediction = async (record: MachineModelTrainedInformation) => {
     const { machineID } = record
-    const machinePredictionQueryResponse = await client.query({
+    const machinePredictionQueryResponse = await pythonClient.query({
       query: getMachinePredictionByMachineId(machineID),
     })
 
-    const s = machinePredictionQueryResponse.data.queryResult as MachinePredictionResponse
-    console.log(`Response: ${JSON.stringify(s, null, 2)}`)
+    const machinePredictionResult = machinePredictionQueryResponse.data.queryResult as MachinePredictionResponse
+    const { machinePrediction } = machinePredictionResult
+    notifyUser(`Machine Prediction is ${machinePrediction}`, 'Success')
   }
 
   const getColumns = (
