@@ -1,12 +1,13 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 CORS(app)
 
-@app.route("/api/machinePrediction")
+@app.route("/api/machinePrediction", methods=['GET'])
 def home():
-    return jsonify(machinePrediction='F1')
+    incomingMachineId = request.args.get('machineId')
+    return jsonify(machinePrediction=incomingMachineId)
 
 if __name__ == "__main__":
     app.run(debug=True)
