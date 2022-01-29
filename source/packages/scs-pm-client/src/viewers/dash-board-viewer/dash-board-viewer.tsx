@@ -41,7 +41,7 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
 
   const [isGraphView, setIsGraphView] = useState<boolean>(true)
   const [tableColumns] = useState<string[]>([
-    'index',
+    'key',
     'machineID',
     'speed_desired',
     'ambient_temperature',
@@ -61,14 +61,28 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
 
       const machineLogsQueryResult = await client.query({ query: getMachineLogsByMachineId(machineId) })
       const machineLogsResult = machineLogsQueryResult.data.queryResult as MachineLogsResponse
-      setLogs(machineLogsResult.machineLogs)
+      setLogs(
+        machineLogsResult.machineLogs.map(c => {
+          return {
+            ...c,
+            key: `${c.machineID}_${c.timestamp.toString()}`,
+          }
+        }),
+      )
 
       const machineModelTrainedInfoQueryResult = await client.query({
         query: getMachineModelTrainedInfoByMachineId(machineId),
       })
       const machineModelTrainedResult = machineModelTrainedInfoQueryResult.data
         .queryResult as MachineModelTrainedInformationResponse
-      setMachineModelTrainedInfo(machineModelTrainedResult.machineModelTrainedInformation)
+      setMachineModelTrainedInfo(
+        machineModelTrainedResult.machineModelTrainedInformation.map(x => {
+          return {
+            ...x,
+            key: `${x.machineID}_${x.cycle.toString()}`,
+          }
+        }),
+      )
     }
     queryCall()
   }, [machineModelInfo])

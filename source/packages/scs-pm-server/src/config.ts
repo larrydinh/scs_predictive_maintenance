@@ -19,7 +19,6 @@ export const config = {
     machineModelTrainedInformation: 'trained-data.csv',
     machineModel: 'pm_pro3.pkl',
     telemetryHeaders: [
-      'index',
       'timestamp',
       'speed_desired',
       'ambient_temperature',
@@ -29,9 +28,8 @@ export const config = {
       'pressure',
       'machineID',
     ],
-    logHeaders: ['index', 'timestamp', 'machineID', 'level', 'code'],
+    logHeaders: ['timestamp', 'machineID', 'level', 'code'],
     machineModelTrainedInfoHeaders: [
-      'index',
       'machineID',
       'cycle',
       'speed_desired_max',
