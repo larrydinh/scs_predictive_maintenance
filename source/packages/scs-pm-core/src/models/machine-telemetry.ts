@@ -26,8 +26,11 @@ export interface MachineModelTrainedInformation {
   pressure_max_avg: number
 }
 
+export interface MachinePrediction {
+  machineID: string
+}
 export interface MachinePredictionResponse {
-  machinePrediction: string
+  machinePrediction: MachinePrediction
 }
 
 export interface MachineModelTrainedInformationResponse {

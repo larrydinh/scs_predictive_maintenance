@@ -1,6 +1,6 @@
+import { spawn } from 'child_process'
 import { Request, Response, Router } from 'express'
-import * as fs from 'fs'
-import * as jpickle from 'jpickle'
+import * as http from 'http'
 import * as path from 'path'
 import {
   getErrorMessage,
@@ -20,6 +20,10 @@ import {
 import { getVersionInformation, verifySystem } from './system'
 
 export const api = Router()
+const pythonServerPath = path.join(__dirname, './python-server/app.py')
+const pythonProcess = spawn('python3', [pythonServerPath], {
+  stdio: 'inherit',
+})
 
 function verifyServerSetup(_req: Request, res: Response) {
   const verificationResult = verifySystem()
@@ -115,16 +119,29 @@ async function machinePrediction(req: Request, res: Response) {
   const { machineId } = req.query
   try {
     log.info(`Prediction for Machine:${machineId} are requested`)
+    log.info(`Python process is started with pid: ${pythonProcess.pid}`)
 
     const modelPath = path.join(__dirname, './raw-data/pm_pro3.pkl')
-    console.log(`model path: ${JSON.stringify(modelPath, null, 2)}`)
-    const modelData = fs.readFileSync(modelPath, 'binary')
+    const httpsReq = http.request(
+      `http://127.0.0.1:5000/api/machinePrediction?machineId=M_0001&modelPath=${modelPath}`,
+      httpsRes => {
+        httpsRes.setEncoding('utf8')
+        httpsRes.on('data', d => {
+          res.status(200).json({
+            machinePrediction: JSON.parse(JSON.stringify(d)),
+          })
+        })
+      },
+    )
 
-    const f = await jpickle.loads(modelData)
+    httpsReq.on('error', err => {
+      log.warn(`Killing python server with pid: ${pythonProcess.pid}`)
+      res.status(500).json({ responseId: undefined, errorMessage: err.message })
+    })
 
-    console.log(`f: ${f}`)
-    console.log(`f: ${JSON.stringify(f, null, 2)}`)
-    res.status(200).json({ machinePrediction: `prediction for ${machineId} is done` })
+    // httpsReq.write(JSON.stringify({ machineId }))
+
+    httpsReq.end()
   } catch (err) {
     const errorMessage = `Unable to get the machine model trained  data for the machine ${machineId} due to: ${getErrorMessage(
       err,

@@ -4,7 +4,7 @@
   "description": "Server for the predictive maintenance",
   "main": "index.js",
   "scripts": {
-    "postinstall": "npm run copy:csv-resources",
+    "postinstall": "npm run copy:csv-resources && npm run copy:python-resources",
     "start:dev": "nodemon",
     "build": "tsc --build --force",
     "build:watch": "tsc --watch",
@@ -15,6 +15,7 @@
     "lint": "eslint src",
     "prettier": "prettier --write '**/*.{ts,js}'",
     "copy:csv-resources": "cpx \"src/raw-data/**\" \"build/dist/raw-data/\" -v -C",
+    "copy:python-resources": "cpx \"src/python-server/**\" \"build/dist/python-server/\" -v -C",
     "generate-license-info": "node scripts/generate-license-info"
   },
   "keywords": [
