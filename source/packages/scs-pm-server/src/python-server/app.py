@@ -14,7 +14,7 @@ def home():
     app.logger.info('Received machine id is %s', incomingMachineId)
     app.logger.info('Model path is %s', modelPath)
 
-    favorite_color = pickle.load( open( modelPath ) )
+    model_object = pickle.load( open(modelPath, "rb"))
 
     # object_file = pickle.load(modelPath, "rb")
     # app.logger.info('Model path is %s', favorite_color)
