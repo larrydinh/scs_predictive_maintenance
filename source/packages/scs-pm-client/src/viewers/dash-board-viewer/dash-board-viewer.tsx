@@ -14,6 +14,7 @@ import {
   MachinePredictionResponse,
   MachineTelemetry,
   MachineVitalsResponse,
+  PredictionResult,
 } from '../../models'
 import {
   getMachineLogsByMachineId,
@@ -96,9 +97,18 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
     })
 
     const machinePredictionResult = machinePredictionQueryResponse.data.queryResult as MachinePredictionResponse
-    const { machineId, prediction } = machinePredictionResult
+    const { machineId, prediction, predictionResult } = machinePredictionResult
 
-    notifyUser(`Prediction for machine with id ${machineId} in cycle: ${cycle} is  ${prediction}`, 'Info')
+    const notificationType =
+      predictionResult === PredictionResult.SEVERE_STATE
+        ? 'Error'
+        : predictionResult === PredictionResult.BAD_STATE
+        ? 'Warn'
+        : 'Info'
+    notifyUser(
+      `Prediction for machine with id ${machineId} in cycle: ${cycle} is  ${prediction} (${predictionResult})`,
+      notificationType,
+    )
   }
 
   const getColumns = (

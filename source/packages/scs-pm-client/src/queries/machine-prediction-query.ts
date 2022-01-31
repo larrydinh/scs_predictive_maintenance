@@ -4,7 +4,10 @@ export function getMachinePredictionByMachineId(machineId: string, cycle: number
   const query = gql(`
     query machinePrediction {
       queryResult @rest(type: "MachinePredictionResponse", path: "machinePrediction?machineId=${machineId}&cycle=${cycle}") {
-        machinePrediction
+        machineId
+        cycle
+        prediction
+        predictionResult
       }
     }
   `)

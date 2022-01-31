@@ -8,6 +8,7 @@ import {
   MachineModelInformation,
   MachineModelTrainedInformation,
   MachineTelemetry,
+  PredictionResult,
 } from 'scs-pm-core'
 import { config } from './config'
 import { log } from './logger'
@@ -151,10 +152,10 @@ async function machinePrediction(req: Request, res: Response) {
 
                 const predictionResult =
                   d.trim() === '"F1"'
-                    ? 'Severe State'
+                    ? PredictionResult.SEVERE_STATE
                     : d.trim() === '"F2"'
-                    ? 'Bad State'
-                    : 'Machine is working fine'
+                    ? PredictionResult.BAD_STATE
+                    : PredictionResult.WORKING_FINE_STATE
 
                 res.status(200).json({
                   machineId,

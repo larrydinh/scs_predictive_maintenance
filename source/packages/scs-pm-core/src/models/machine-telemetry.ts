@@ -1,3 +1,5 @@
+import { PredictionResult } from './enums'
+
 export interface MachineTelemetry {
   timestamp: string
   speed_desired: number
@@ -30,6 +32,7 @@ export interface MachinePredictionResponse {
   machineId: string
   cycle: number
   prediction: string
+  predictionResult: PredictionResult
 }
 
 export interface MachineModelTrainedInformationResponse {
