@@ -90,14 +90,15 @@ export const DashboardViewer: React.FC<Props> = ({ machineModelInfo }: Props) =>
   }, [machineModelInfo])
 
   const getMachinePrediction = async (record: MachineModelTrainedInformation) => {
-    const { machineID } = record
+    const { machineID, cycle } = record
     const machinePredictionQueryResponse = await client.query({
-      query: getMachinePredictionByMachineId(machineID),
+      query: getMachinePredictionByMachineId(machineID, cycle),
     })
 
     const machinePredictionResult = machinePredictionQueryResponse.data.queryResult as MachinePredictionResponse
-    const { machinePrediction } = machinePredictionResult
-    notifyUser(`Machine Prediction is ${machinePrediction.machineID}`, 'Success')
+    const { machineId, prediction } = machinePredictionResult
+
+    notifyUser(`Prediction for machine with id ${machineId} in cycle: ${cycle} is  ${prediction}`, 'Info')
   }
 
   const getColumns = (

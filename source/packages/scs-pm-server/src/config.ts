@@ -45,6 +45,18 @@ export const config = {
       'pressure_avg_avg',
       'pressure_max_avg',
     ],
+    modelHeaders: [
+      'speed_desired_max',
+      'speed_avg',
+      'temperature_avg',
+      'temperature_max',
+      'pressure_avg',
+      'pressure_max',
+      'temperature_avg_avg',
+      'temperature_max_avg',
+      'pressure_avg_avg',
+      'pressure_max_avg',
+    ],
   },
   rawData: {
     path: `${__dirname}/raw-data/`,

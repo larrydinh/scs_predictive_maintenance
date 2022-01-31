@@ -1,3 +1,4 @@
+import json
 import logging
 
 import joblib
@@ -12,19 +13,28 @@ CORS(app)
 def home():
     incomingMachineId = request.args.get('machineId')
     modelPath = request.args.get('modelPath')
+    column_names = request.args.get('columnNames')
+    data_points = request.args.get('dataPoints')
+
     app.logger.info('Received machine id is %s', incomingMachineId)
     app.logger.info('Model path is %s', modelPath)
 
+    json_object = json.loads(data_points)
+    pairs = json_object.items()
+
+    vitals_value = []
+    for key, value in pairs:
+      vitals_value.append(value)
+
     modelObj = joblib.load(modelPath)
 
-    column_names = ["speed_desired_max","speed_avg","temperature_avg","temperature_max","pressure_avg","pressure_max","temperature_avg_avg","temperature_max_avg","pressure_avg_avg","pressure_max_avg"]
-    data = [[1000.0,1162.84,187.61,214.81,497.7,615.16,169.8,176.17,723.8,842.19]]
+    data = [vitals_value]
     df = pd.DataFrame(data=data, columns = column_names)
 
     modelPrediction = modelObj.predict(df)
     app.logger.info('Model prediction is: %s', modelPrediction)
 
-    return jsonify(machineID=incomingMachineId, modelPath=modelPath, output=modelPrediction[0])
+    return jsonify(modelPrediction[0])
 
 if __name__ == "__main__":
     app.run(debug=True)

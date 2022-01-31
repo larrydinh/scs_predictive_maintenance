@@ -79,3 +79,20 @@ export function getMachineModelTrainedInformation(
     },
   )
 }
+
+export function getMachineModelTrainedInformationByMachineIdAndCycle(
+  machineId: string,
+  cycle: number,
+  callBack: (machineModelTrainedInformation: MachineModelTrainedInformation[]) => void,
+) {
+  getCSVData<MachineModelTrainedInformation>(
+    path.join(config.getMachinesDirectory(), config.app.machineModelTrainedInformation),
+    config.app.machineModelTrainedInfoHeaders,
+    (data: MachineModelTrainedInformation[]) => {
+      const machineModelTrainedInformation = data.filter(
+        mac => mac.machineID === machineId && +mac.cycle === cycle,
+      )
+      callBack(machineModelTrainedInformation)
+    },
+  )
+}

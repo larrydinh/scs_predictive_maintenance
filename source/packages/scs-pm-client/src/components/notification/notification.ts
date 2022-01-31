@@ -1,7 +1,7 @@
 import { notification } from 'antd'
 import { ArgsProps } from 'antd/lib/notification'
 
-type NotificationType = 'Success' | 'Error' | 'Warn' | 'Info'
+export type NotificationType = 'Success' | 'Error' | 'Warn' | 'Info'
 const DEFAULT_NOTIFICATION_DURATION = 4.5
 
 const defaultNotificationStyle: React.CSSProperties = {

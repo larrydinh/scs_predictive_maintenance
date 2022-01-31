@@ -26,11 +26,10 @@ export interface MachineModelTrainedInformation {
   pressure_max_avg: number
 }
 
-export interface MachinePrediction {
-  machineID: string
-}
 export interface MachinePredictionResponse {
-  machinePrediction: MachinePrediction
+  machineId: string
+  cycle: number
+  prediction: string
 }
 
 export interface MachineModelTrainedInformationResponse {

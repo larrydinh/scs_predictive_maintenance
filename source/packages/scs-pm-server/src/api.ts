@@ -9,12 +9,14 @@ import {
   MachineModelTrainedInformation,
   MachineTelemetry,
 } from 'scs-pm-core'
+import { config } from './config'
 import { log } from './logger'
 import {
   addNewMachineToExistingMachines,
   getAllMachinesModelInformation,
   getMachineLogs,
   getMachineModelTrainedInformation,
+  getMachineModelTrainedInformationByMachineIdAndCycle,
   getMachineVitals,
 } from './machine'
 import { getVersionInformation, verifySystem } from './system'
@@ -116,38 +118,71 @@ function machineModelTrainedInformation(req: Request, res: Response) {
 }
 
 async function machinePrediction(req: Request, res: Response) {
-  const { machineId } = req.query
-  try {
-    log.info(`Prediction for Machine:${machineId} are requested`)
-    log.info(`Python process is started with pid: ${pythonProcess.pid}`)
+  const { machineId, cycle } = req.query
+  if (cycle && machineId) {
+    try {
+      log.info(`Prediction for Machine:${machineId} for cycle: ${cycle} is requested`)
+      log.info(`Python process is started with pid: ${pythonProcess.pid}`)
+      const modelPath = path.join(__dirname, './raw-data/pm_pro3.pkl')
+      const headers = config.app.modelHeaders
 
-    const modelPath = path.join(__dirname, './raw-data/pm_pro3.pkl')
-    const httpsReq = http.request(
-      `http://127.0.0.1:5000/api/machinePrediction?machineId=M_0001&modelPath=${modelPath}`,
-      httpsRes => {
-        httpsRes.setEncoding('utf8')
-        httpsRes.on('data', d => {
-          res.status(200).json({
-            machinePrediction: JSON.parse(JSON.stringify(d)),
+      getMachineModelTrainedInformationByMachineIdAndCycle(
+        machineId as string,
+        +cycle,
+        (dataRow: MachineModelTrainedInformation[]) => {
+          log.info(`Total ${dataRow.length} trained rows are found for machine id:${machineId}`)
+
+          const data = dataRow[0]
+          const columnNames = headers.join(',')
+          const dataPoints: Partial<MachineModelTrainedInformation> = {}
+          headers.forEach(h => {
+            dataPoints[h] = +data[h]
           })
-        })
-      },
-    )
+          log.info(`Data points before passing: ${JSON.stringify(dataPoints, null, 2)}`)
 
-    httpsReq.on('error', err => {
-      log.warn(`Killing python server with pid: ${pythonProcess.pid}`)
-      res.status(500).json({ responseId: undefined, errorMessage: err.message })
-    })
+          const httpsReq = http.request(
+            `http://127.0.0.1:5000/api/machinePrediction?machineId=M_0001&modelPath=${modelPath}&columnNames${columnNames}&dataPoints=${JSON.stringify(
+              dataPoints,
+            )}`,
+            httpsRes => {
+              httpsRes.setEncoding('utf8')
+              httpsRes.on('data', d => {
+                log.info(`The prediction of machine ${machineId} on cycle: ${cycle} is ${d}`)
 
-    // httpsReq.write(JSON.stringify({ machineId }))
+                const predictionResult =
+                  d.trim() === '"F1"'
+                    ? 'Severe State'
+                    : d.trim() === '"F2"'
+                    ? 'Bad State'
+                    : 'Machine is working fine'
 
-    httpsReq.end()
-  } catch (err) {
-    const errorMessage = `Unable to get the machine model trained  data for the machine ${machineId} due to: ${getErrorMessage(
-      err,
-    )}`
-    log.error(errorMessage)
-    res.status(500).json({ error: errorMessage })
+                res.status(200).json({
+                  machineId,
+                  cycle: +cycle,
+                  prediction: d.trim(),
+                  predictionResult,
+                })
+              })
+            },
+          )
+
+          httpsReq.on('error', err => {
+            log.warn(`Killing python server with pid: ${pythonProcess.pid}`)
+            res.status(500).json({ responseId: undefined, errorMessage: err.message })
+          })
+
+          // httpsReq.write(JSON.stringify({ machineId }))
+
+          httpsReq.end()
+        },
+      )
+    } catch (err) {
+      const errorMessage = `Unable to get the machine model trained  data for the machine ${machineId} due to: ${getErrorMessage(
+        err,
+      )}`
+      log.error(errorMessage)
+      res.status(500).json({ error: errorMessage })
+    }
   }
 }
 
