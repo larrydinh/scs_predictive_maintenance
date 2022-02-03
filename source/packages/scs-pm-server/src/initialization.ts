@@ -20,4 +20,10 @@ export function initialize() {
     config.app.machineLogs,
     readFile(config.rawData.path, config.rawData.machineDummyLogs, 'CSV'),
   )
+
+  createFile(
+    config.getMachinesDirectory(),
+    config.app.machineModelTrainedInformation,
+    readFile(config.rawData.path, config.rawData.machineModelTrainedDummyInformation, 'CSV'),
+  )
 }

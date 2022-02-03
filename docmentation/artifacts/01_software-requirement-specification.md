@@ -3,6 +3,7 @@
 
 ### Introduction
   1.1 Introduction
+  In this project, we have created a web app for predictive maintainance 
   1.2 Scope
   1.3 Definitions, acronyms and abbreviations
   1.4 References
@@ -45,7 +46,7 @@
 
 #### Functional Requirement:
 
-1. System must be able to display the vitals of the machine for analytics   purposes. The vitals like speed, pressure, and temperature must be visualized as graphs for a selected machine
+1. System must be able to display the vitals of the machine for analytics purposes. The vitals like speed, pressure, and temperature must be visualized as graphs for a selected machine
 2. The prediction results and messages must be displayed for a selected machine along with the vitals
 3. The system must be supported with information export functionalities to either CSV and text files.
 4. The Vitals of a selected machine must be exported as CSV file with file name having as a combination of vitals, machine name and date of export (e.g: vitals_machineA_DDMMYYYY.csv). The exported file must at least contain the following information

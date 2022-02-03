@@ -59,6 +59,7 @@
     "pino": "7.5.1",
     "pino-pretty": "7.2.0",
     "scs-pm-core": "^1.0.0",
-    "tslib": "2.3.1"
+    "tslib": "2.3.1",
+    "jpickle": "0.4.1"
   }
 }

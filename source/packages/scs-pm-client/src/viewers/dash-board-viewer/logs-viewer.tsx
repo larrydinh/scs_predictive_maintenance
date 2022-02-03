@@ -5,6 +5,7 @@ import { capitalizeFirstCharacter, MachineLog, MachineLogLevel } from '../../mod
 
 interface Props {
   data: MachineLog[]
+  filterTableColumns: string[]
 }
 
 const tagStyle: React.CSSProperties = {
@@ -13,7 +14,7 @@ const tagStyle: React.CSSProperties = {
   padding: 8,
 }
 
-export const LogsViewer: React.FC<Props> = ({ data }: Props) => {
+export const LogsViewer: React.FC<Props> = ({ data, filterTableColumns }: Props) => {
   const getMachineLevel = (text: string) => {
     switch (text.toLocaleLowerCase()) {
       case MachineLogLevel.CRITICAL.toLocaleLowerCase():
@@ -59,13 +60,13 @@ export const LogsViewer: React.FC<Props> = ({ data }: Props) => {
   }
 
   const getColumns = () => {
-    const columnHeaders = Object.keys(data[data.length - 1])
+    const columnHeaders = Object.keys(data[data.length - 1]).filter(key => filterTableColumns.indexOf(key) === -1)
     return columnHeaders.map(header => {
       return {
         title: capitalizeFirstCharacter(header),
         dataIndex: header,
         key: header,
-        width: 'auto',
+        width: 250,
         render: (text: any) => {
           if (header === 'Level'.toLocaleLowerCase()) {
             return getMachineLevel(text)

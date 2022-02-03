@@ -6,19 +6,35 @@ interface Props {
   xField: string
   yField: string
   tickCount: number
+  xAxisTitle: string
+  yAxisTitle: string
 }
 
-export const LinePlotWithSlider: React.FC<Props> = ({ data, xField, yField, tickCount }: Props) => {
+export const LinePlotWithSlider: React.FC<Props> = ({
+  data,
+  xField,
+  yField,
+  xAxisTitle,
+  yAxisTitle,
+  tickCount,
+}: Props) => {
   const config: LineConfig = {
     data,
     xField,
     yField,
     xAxis: {
       tickCount,
+      title: {
+        text: xAxisTitle,
+      },
+    },
+    yAxis: {
+      title: {
+        text: yAxisTitle,
+      },
     },
     legend: {
       layout: 'horizontal',
-
       position: 'top',
     },
     slider: {
