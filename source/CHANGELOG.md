@@ -2,10 +2,15 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
-#### [Unreleased](https://github.com/amittkSharma/scs_predictive_maintenance/compare/v1.0.0...HEAD)
+#### [Unreleased](https://github.com/amittkSharma/scs_predictive_maintenance/compare/v2.0.0...HEAD)
+
+### [v2.0.0](https://github.com/amittkSharma/scs_predictive_maintenance/compare/v1.0.0...v2.0.0)
+
+> 5 February 2022
 
 - Feature/srs draft [`#51`](https://github.com/amittkSharma/scs_predictive_maintenance/pull/51)
 - feat: Add new machine UI interface [`#49`](https://github.com/amittkSharma/scs_predictive_maintenance/pull/49)
+- Update master brach with version 0.6.0 [`#39`](https://github.com/amittkSharma/scs_predictive_maintenance/pull/39)
 - chore: Update change log [`ee2e010`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/ee2e0102be9b2b1ddada168d57cc05def8733476)
 - chore: Update the machine model information interface by removing the manufacturer contact person [`d91e5b4`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/d91e5b4ec12a4f7b985c5c9aec71316036e48b1c)
 - chore: Lint and prettify the whole code [`dea3547`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/dea35470700abed6e641bf1d29376d4f4f58e9b1)
@@ -17,6 +22,25 @@ All notable changes to this project will be documented in this file. Dates are d
 - chore: Complete the FMEA hazard analysis for network, deployment, secured communication, security of exported data [`4fad711`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/4fad711c9bba46912c09a6f43099b8da0d4835f3)
 - feat: Add a table view in the dashboard to reduce graph reading problems [`e39c689`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/e39c689157e9c3e93b98c34b4a8f2b600a1da6cd)
 - feat: In the logs viewer also removed the machine id as it is redundant [`7657ca9`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/7657ca90418e7e98d9406630f2a7f474fef658f1)
+- chore: Updated the changelog [`2f610d0`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/2f610d01b12984d4c344e02751de2aba316e52ab)
+- feat: Added machine model trained information to the system [`feaf899`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/feaf899098224bf06332fa0d9bcfa0c49daf35e9)
+- fix: The headers selection in the telemetry and logs file, fix the dummy data [`df4cb8d`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/df4cb8d64edac2c45820644b2b3edb536879f506)
+- feat: Integration of the python model [`ed5a6e6`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/ed5a6e63e3f7507e2413a9749a297b8c62c80f29)
+- chore: Adding the wireframes for the dashboard [`dd024e4`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/dd024e40eb12a03573c38e8d9780a50faed81492)
+- fix: The machine id's and the columns the files [`99c62ef`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/99c62ef06f7466a0124f2e2b882dfbadb29d3dcc)
+- feat: Adding the wireframes for the dashboard and resource manager [`7f3df93`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/7f3df93c2a47e5861ab65d5bc620e4897fdf150e)
+- chore: Added the python server and integrated with the client [`d46cc10`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/d46cc109cb72697f04a4baa0f432267c0f24c9bd)
+- chore: Identify the way to pass the params to the flask route [`d9f4d2e`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/d9f4d2e8f6344078e8cf4097e5f3da8d475f62ab)
+- chore: Update the new data in the project and fix the headers of the file. [`6b64ad8`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/6b64ad86db1778cb1778966df3813749df6d0c49)
+- feat: Cycle selection updating the graphs [`f9e76b7`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/f9e76b72d29afb560f71ed71341d95cdbfae790c)
+- feat: Moving the python server inside the nodejs [`7e4487f`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/7e4487ff7f633e9121b4ef748ec71cba5ffee00d)
+- feat: Adding the components communication diagram [`80c8d2a`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/80c8d2a7fb81648257f8039678ec930ff4f0bd5b)
+- feat: Update the python server [`87256c1`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/87256c104c0d833ed312a5087c8d00f1070926ac)
+- feat: Loading the pkl file using joblib rather than pickle [`ceb3b59`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/ceb3b594cd74193a47d87e50a2a908735e486222)
+- feat: Integrate the working of prediction model [`bf6e9cf`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/bf6e9cf3a23c96a3e48cb71c938dd39c9527eaa6)
+- feat: Integrate end to end the prediction model [`d05bc30`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/d05bc306bffc9d14d26f2ca60124e17306fa4bed)
+- feat: Fix the notification as the prediction result. [`26f7322`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/26f7322b1a5ae710e52ef672cefa4d6b8ef7836a)
+- chore: Added a deployment guide to the documents [`0e40717`](https://github.com/amittkSharma/scs_predictive_maintenance/commit/0e407175a3a2198102bc44bf5c08f82ed04c6d41)
 
 ### [v1.0.0](https://github.com/amittkSharma/scs_predictive_maintenance/compare/v0.6.0...v1.0.0)
 
