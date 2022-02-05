@@ -1,6 +1,6 @@
 {
   "name": "scs-pm-server",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Server for the predictive maintenance",
   "main": "index.js",
   "scripts": {
@@ -57,10 +57,10 @@
     "csv-parse": "5.0.4",
     "dotenv": "10.0.0",
     "express": "4.17.1",
+    "jpickle": "0.4.1",
     "pino": "7.5.1",
     "pino-pretty": "7.2.0",
-    "scs-pm-core": "^1.0.0",
-    "tslib": "2.3.1",
-    "jpickle": "0.4.1"
+    "scs-pm-core": "^2.0.0",
+    "tslib": "2.3.1"
   }
 }
