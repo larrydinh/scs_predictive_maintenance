@@ -1,0 +1,112 @@
+<mxfile host="65bd71144e">
+    <diagram id="aiFSSA-1Wh0A5DQu-0Vo" name="Components">
+        <mxGraphModel dx="852" dy="596" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="583" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="4" value="USER INTERFACE" style="shape=table;startSize=30;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;pointerEvents=1;fontColor=#66B2FF;labelBackgroundColor=none;fillColor=none;strokeColor=default;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="280" width="140" height="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=1;fillColor=none;top=0;left=0;bottom=1;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4" vertex="1">
+                    <mxGeometry y="30" width="140" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="1" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;" parent="5" vertex="1">
+                    <mxGeometry width="44" height="30" as="geometry">
+                        <mxRectangle width="44" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="7" value="Value 1" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;pointerEvents=1;" parent="5" vertex="1">
+                    <mxGeometry x="44" width="96" height="30" as="geometry">
+                        <mxRectangle width="96" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="8" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=1;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4" vertex="1">
+                    <mxGeometry y="60" width="140" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="2" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;" parent="8" vertex="1">
+                    <mxGeometry width="44" height="30" as="geometry">
+                        <mxRectangle width="44" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="10" value="Value 2" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;pointerEvents=1;" parent="8" vertex="1">
+                    <mxGeometry x="44" width="96" height="30" as="geometry">
+                        <mxRectangle width="96" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="11" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=1;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4" vertex="1">
+                    <mxGeometry y="90" width="140" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="3" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;" parent="11" vertex="1">
+                    <mxGeometry width="44" height="30" as="geometry">
+                        <mxRectangle width="44" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="13" value="Value 3" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;pointerEvents=1;" parent="11" vertex="1">
+                    <mxGeometry x="44" width="96" height="30" as="geometry">
+                        <mxRectangle width="96" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="21" value="SERVER" style="swimlane;startSize=20;horizontal=1;containerType=tree;fontColor=#3399FF;strokeColor=default;gradientColor=none;swimlaneFillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="205" width="250" height="320" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;startArrow=none;endArrow=none;rounded=0;" parent="21" source="23" target="24" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="NODEJS Server" style="whiteSpace=wrap;html=1;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};" parent="21" vertex="1">
+                    <mxGeometry x="85" y="50" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="PYTHON Server" style="whiteSpace=wrap;html=1;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};" parent="21" vertex="1">
+                    <mxGeometry x="85" y="190" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value="" style="shape=doubleArrow;whiteSpace=wrap;html=1;" parent="21" vertex="1">
+                    <mxGeometry x="205" y="70" width="165" height="7.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="29" value="" style="shape=doubleArrow;whiteSpace=wrap;html=1;" parent="21" vertex="1">
+                    <mxGeometry x="205" y="210" width="175" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="32" value="REST API" style="text;strokeColor=none;fillColor=none;html=1;fontSize=12;fontStyle=1;verticalAlign=middle;align=center;rotation=-90;" parent="21" vertex="1">
+                    <mxGeometry x="85" y="130" width="100" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="Prediction Model" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="1" vertex="1">
+                    <mxGeometry x="690" y="380" width="100" height="128" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" value="REST API" style="shape=doubleArrow;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="180" y="340" width="130" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" value="&lt;span&gt;Storage File System Base&lt;/span&gt;" style="shape=datastore;whiteSpace=wrap;html=1;fontSize=12;fontColor=#3399FF;" parent="1" vertex="1">
+                    <mxGeometry x="685" y="210" width="110" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" value="Machine With IoT Sensors" style="label;whiteSpace=wrap;html=1;align=center;verticalAlign=bottom;spacingLeft=0;spacingBottom=4;imageAlign=center;imageVerticalAlign=top;image=img/clipart/Gear_128x128.png;fontSize=12;fontColor=#3399FF;" parent="1" vertex="1">
+                    <mxGeometry x="390" y="40" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="36" value="Machine With IoT Sensors" style="label;whiteSpace=wrap;html=1;align=center;verticalAlign=bottom;spacingLeft=0;spacingBottom=4;imageAlign=center;imageVerticalAlign=top;image=img/clipart/Gear_128x128.png;fontSize=12;fontColor=#3399FF;" parent="1" vertex="1">
+                    <mxGeometry x="540" y="40" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="37" value="Machine With IoT Sensors" style="label;whiteSpace=wrap;html=1;align=center;verticalAlign=bottom;spacingLeft=0;spacingBottom=4;imageAlign=center;imageVerticalAlign=top;image=img/clipart/Gear_128x128.png;fontSize=12;fontColor=#3399FF;" parent="1" vertex="1">
+                    <mxGeometry x="675" y="40" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;endArrow=classic;html=1;fontSize=12;fontColor=#3399FF;exitX=0.35;exitY=1.038;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="35" target="34" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="400" y="230" as="sourcePoint"/>
+                        <mxPoint x="450" y="180" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="39" value="" style="edgeStyle=elbowEdgeStyle;elbow=horizontal;endArrow=classic;html=1;fontSize=12;fontColor=#3399FF;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="600" y="120" as="sourcePoint"/>
+                        <mxPoint x="740" y="210" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="40" value="" style="endArrow=classic;html=1;fontSize=12;fontColor=#3399FF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="37" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="440" y="230" as="sourcePoint"/>
+                        <mxPoint x="735" y="210" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="41" value="&lt;font color=&quot;#ffffff&quot;&gt;Registering IoT Sensor Data &amp;amp; logs&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontColor=#3399FF;" parent="1" vertex="1">
+                    <mxGeometry x="480" y="150" width="200" height="20" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

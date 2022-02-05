@@ -1,44 +1,47 @@
 {
   "machines": [
     {
-      "identifier": "5fa2204e-0326-415f-a1f5-fff74f0d0ddd",
+      "identifier": "5eac7035-ffb4-41ac-a4d1-86fc963a0fc8",
       "name": "Machine A",
-      "machineId": "M_0140",
+      "machineId": "M_0000",
       "givenName": "Machine A1",
+      "isActive": true,
       "model": "Machine Model A1",
       "manufactureYear": "2000",
       "manufacturerName": "Machine A1 Gmbh",
-      "manufacturerContactPerson": {
-        "identifier": "114d1854-f7c1-4d04-8850-4446e0efc93d",
-        "firstName": "Thomas",
-        "lastName": "Thomas",
-        "contactNumber": 100,
-        "email": "thomas@email.com"
-      },
       "purchaseDate": "2021-11-22T12:27:42.303Z",
       "inductionDate": "2021-12-22T12:27:42.303Z",
-      "departmentName": "Department A1",
+      "departmentName": "Operations",
       "description": "Welding Machine",
       "operatingManualLink": "https://github.com/amittkSharma/scs_predictive_maintenance/projects"
     },
     {
-      "identifier": "c2ed4452-25a5-4f02-a60c-ef4572cdbb39",
+      "identifier": "5fa2204e-0326-415f-a1f5-fff74f0d0ddd",
       "name": "Machine B",
-      "machineId": "M_0054",
-      "givenName": "Machine B1",
-      "model": "Machine Model B1",
+      "machineId": "M_0001",
+      "givenName": "Machine B",
+      "isActive": true,
+      "model": "Machine Model B",
+      "manufactureYear": "2000",
+      "manufacturerName": "Machine B Gmbh",
+      "purchaseDate": "2021-11-22T12:27:42.303Z",
+      "inductionDate": "2021-12-22T12:27:42.303Z",
+      "departmentName": "Manufacturing",
+      "description": "Latte Machine",
+      "operatingManualLink": "https://github.com/amittkSharma/scs_predictive_maintenance/projects"
+    },
+    {
+      "identifier": "c2ed4452-25a5-4f02-a60c-ef4572cdbb39",
+      "name": "Machine C",
+      "machineId": "M_0002",
+      "givenName": "Machine C",
+      "isActive": false,
+      "model": "Machine Model C",
       "manufactureYear": "2001",
-      "manufacturerName": "Machine B1 Gmbh",
-      "manufacturerContactPerson": {
-        "identifier": "114d1854-f7c1-4d04-8850-4446e0efc93c",
-        "firstName": "Daniel",
-        "lastName": "Daniel",
-        "contactNumber": 100,
-        "email": "daniel@myEmail.com"
-      },
+      "manufacturerName": "Machine C Gmbh",
       "purchaseDate": "2021-09-22T12:27:42.303Z",
       "inductionDate": "2021-10-22T12:27:42.303Z",
-      "departmentName": "Department B1",
+      "departmentName": "Human Resources",
       "description": "Wash Machine",
       "operatingManualLink": "https://github.com/amittkSharma?tab=repositories"
     }

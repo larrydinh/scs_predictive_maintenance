@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { DashboardViewer } from 'src/viewers'
-import { Layout, QueryProvider, Selector } from '../components'
+import { Alert, Layout, QueryProvider, Selector } from '../components'
 import { MachineModelInfoResponse, MachineModelInformation } from '../models'
 import { getAllMachineModelInformationQuery } from '../queries'
 import { AppNavigation } from './app-navigation/app-navigation'
@@ -11,28 +11,34 @@ export const DashBoardPage: React.FC = () => {
   return (
     <QueryProvider query={getAllMachineModelInformationQuery}>
       {({ data }) => {
-        const machineModelInfo: MachineModelInformation[] = (data.queryResult as MachineModelInfoResponse).machines
+        const machineModelInfo: MachineModelInformation[] = (
+          data.queryResult as MachineModelInfoResponse
+        ).machines.filter(mac => mac.isActive)
         return (
           <Layout name="Dashboard" appNavigation={<AppNavigation />}>
             <div className="control-panel-container">
               <div className="control-panel">
-                <Selector
-                  style={{ flex: 1, marginRight: '10px' }}
-                  domainValues={machineModelInfo.map(x => {
-                    return {
-                      value: x.identifier,
-                      label: `${x.givenName} (#: ${x.machineId})`,
-                    }
-                  })}
-                  selectedValue={machine?.identifier || 'Select A Machine'}
-                  placeholder="Select An Entity"
-                  onValueChanged={selectedMachineIdentifier => {
-                    const selectedMachine = machineModelInfo.filter(
-                      mac => mac.identifier === selectedMachineIdentifier,
-                    )[0]
-                    setMachine(selectedMachine)
-                  }}
-                />
+                {machineModelInfo ? (
+                  <Selector
+                    style={{ flex: 1, marginRight: '10px' }}
+                    domainValues={machineModelInfo.map(x => {
+                      return {
+                        value: x.identifier,
+                        label: `${x.givenName} (#: ${x.machineId})`,
+                      }
+                    })}
+                    selectedValue={machine?.identifier || 'Select A Machine'}
+                    placeholder="Select An Entity"
+                    onValueChanged={selectedMachineIdentifier => {
+                      const selectedMachine = machineModelInfo.filter(
+                        mac => mac.identifier === selectedMachineIdentifier,
+                      )[0]
+                      setMachine(selectedMachine)
+                    }}
+                  />
+                ) : (
+                  <Alert message="Unable to load the page" type="error" />
+                )}
               </div>
               {machine ? (
                 <DashboardViewer machineModelInfo={machine} />

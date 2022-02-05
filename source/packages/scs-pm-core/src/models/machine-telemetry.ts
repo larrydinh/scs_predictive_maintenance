@@ -1,3 +1,5 @@
+import { PredictionResult } from './enums'
+
 export interface MachineTelemetry {
   timestamp: string
   speed_desired: number
@@ -7,6 +9,34 @@ export interface MachineTelemetry {
   temperature: number
   pressure: number
   machineID: string
+}
+
+export interface MachineModelTrainedInformation {
+  machineID: string
+  cycle: number
+  speed_desired_max: number
+  speed_avg: number
+  temperature_avg: number
+  temperature_max: number
+  pressure_avg: number
+  pressure_max: number
+  cycle_start: string
+  cycle_end: string
+  temperature_avg_avg: number
+  temperature_max_avg: number
+  pressure_avg_avg: number
+  pressure_max_avg: number
+}
+
+export interface MachinePredictionResponse {
+  machineId: string
+  cycle: number
+  prediction: string
+  predictionResult: PredictionResult
+}
+
+export interface MachineModelTrainedInformationResponse {
+  machineModelTrainedInformation: MachineModelTrainedInformation[]
 }
 
 export interface MachineVitalsResponse {

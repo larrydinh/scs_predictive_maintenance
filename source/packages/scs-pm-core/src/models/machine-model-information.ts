@@ -10,11 +10,11 @@ export interface Person extends Resource {
 export interface MachineModelInformation extends Resource {
   name: string
   givenName: string
+  isActive: boolean
   machineId: string
   model: string
   manufactureYear: string
   manufacturerName: string
-  manufacturerContactPerson: Person
   purchaseDate: string
   inductionDate: string
   departmentName: string
@@ -24,4 +24,9 @@ export interface MachineModelInformation extends Resource {
 
 export interface MachineModelInfoResponse {
   machines: MachineModelInformation[]
+}
+
+export interface AddMachineResponse {
+  response: string
+  machine: MachineModelInformation
 }
