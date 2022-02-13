@@ -1,6 +1,6 @@
+import { spawn } from 'child_process'
 import { Request, Response, Router } from 'express'
-import * as fs from 'fs'
-import * as jpickle from 'jpickle'
+import * as http from 'http'
 import * as path from 'path'
 import {
   getErrorMessage,
@@ -8,18 +8,25 @@ import {
   MachineModelInformation,
   MachineModelTrainedInformation,
   MachineTelemetry,
+  PredictionResult,
 } from 'scs-pm-core'
+import { config } from './config'
 import { log } from './logger'
 import {
   addNewMachineToExistingMachines,
   getAllMachinesModelInformation,
   getMachineLogs,
   getMachineModelTrainedInformation,
+  getMachineModelTrainedInformationByMachineIdAndCycle,
   getMachineVitals,
 } from './machine'
 import { getVersionInformation, verifySystem } from './system'
 
 export const api = Router()
+const pythonServerPath = path.join(__dirname, './python-server/app.py')
+const pythonProcess = spawn('python3', [pythonServerPath], {
+  stdio: 'inherit',
+})
 
 function verifyServerSetup(_req: Request, res: Response) {
   const verificationResult = verifySystem()
@@ -112,25 +119,71 @@ function machineModelTrainedInformation(req: Request, res: Response) {
 }
 
 async function machinePrediction(req: Request, res: Response) {
-  const { machineId } = req.query
-  try {
-    log.info(`Prediction for Machine:${machineId} are requested`)
+  const { machineId, cycle } = req.query
+  if (cycle && machineId) {
+    try {
+      log.info(`Prediction for Machine:${machineId} for cycle: ${cycle} is requested`)
+      log.info(`Python process is started with pid: ${pythonProcess.pid}`)
+      const modelPath = path.join(__dirname, './raw-data/pm_pro3.pkl')
+      const headers = config.app.modelHeaders
 
-    const modelPath = path.join(__dirname, './raw-data/pm_pro3.pkl')
-    console.log(`model path: ${JSON.stringify(modelPath, null, 2)}`)
-    const modelData = fs.readFileSync(modelPath, 'binary')
+      getMachineModelTrainedInformationByMachineIdAndCycle(
+        machineId as string,
+        +cycle,
+        (dataRow: MachineModelTrainedInformation[]) => {
+          log.info(`Total ${dataRow.length} trained rows are found for machine id:${machineId}`)
 
-    const f = await jpickle.loads(modelData)
+          const data = dataRow[0]
+          const columnNames = headers.join(',')
+          const dataPoints: Partial<MachineModelTrainedInformation> = {}
+          headers.forEach(h => {
+            dataPoints[h] = +data[h]
+          })
+          log.info(`Data points before passing: ${JSON.stringify(dataPoints, null, 2)}`)
 
-    console.log(`f: ${f}`)
-    console.log(`f: ${JSON.stringify(f, null, 2)}`)
-    res.status(200).json({ machinePrediction: `prediction for ${machineId} is done` })
-  } catch (err) {
-    const errorMessage = `Unable to get the machine model trained  data for the machine ${machineId} due to: ${getErrorMessage(
-      err,
-    )}`
-    log.error(errorMessage)
-    res.status(500).json({ error: errorMessage })
+          const httpsReq = http.request(
+            `http://127.0.0.1:5000/api/machinePrediction?machineId=M_0001&modelPath=${modelPath}&columnNames${columnNames}&dataPoints=${JSON.stringify(
+              dataPoints,
+            )}`,
+            httpsRes => {
+              httpsRes.setEncoding('utf8')
+              httpsRes.on('data', d => {
+                log.info(`The prediction of machine ${machineId} on cycle: ${cycle} is ${d}`)
+
+                const predictionResult =
+                  d.trim() === '"F1"'
+                    ? PredictionResult.SEVERE_STATE
+                    : d.trim() === '"F2"'
+                    ? PredictionResult.BAD_STATE
+                    : PredictionResult.WORKING_FINE_STATE
+
+                res.status(200).json({
+                  machineId,
+                  cycle: +cycle,
+                  prediction: d.trim(),
+                  predictionResult,
+                })
+              })
+            },
+          )
+
+          httpsReq.on('error', err => {
+            log.warn(`Killing python server with pid: ${pythonProcess.pid}`)
+            res.status(500).json({ responseId: undefined, errorMessage: err.message })
+          })
+
+          // httpsReq.write(JSON.stringify({ machineId }))
+
+          httpsReq.end()
+        },
+      )
+    } catch (err) {
+      const errorMessage = `Unable to get the machine model trained  data for the machine ${machineId} due to: ${getErrorMessage(
+        err,
+      )}`
+      log.error(errorMessage)
+      res.status(500).json({ error: errorMessage })
+    }
   }
 }
 

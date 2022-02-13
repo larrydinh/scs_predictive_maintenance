@@ -83,6 +83,7 @@ export const LogsViewer: React.FC<Props> = ({ data, filterTableColumns }: Props)
       key={data.length}
       size={'small'}
       dataSource={data}
+      style={{ maxHeight: 200, overflowY: 'auto' }}
       columns={getColumns()}
       pagination={{
         defaultPageSize: 10,
